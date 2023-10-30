@@ -41,5 +41,10 @@ typedef struct s_data
 	t_colors	*colors;
 }t_data;
 
+/* PARSING */
+int		input_validation(t_data *data, char *file);
+int		parse_line(t_data *data, char *line);
+void	add_data(t_data *data, char **str, int i);
+
 
 #endif

@@ -26,7 +26,7 @@ static void init_data(t_data *data)
 		err_msg("Malloc failed\n");
 }
 
-void add_data(t_data *data, char **str, int i) 
+void add_data(t_data *data, char **str, int i)
 {
 	if (ft_strncmp(str[i], "C", 1) == 0 || ft_strncmp(str[i], "F", 1) == 0)
 	{
@@ -71,22 +71,13 @@ int parse_line(t_data *data, char *line)
 
 static int format_validation(char *file)
 {
-	int len;
-	int i;
-	int ending;
+	char	*res;
 
-	len = ft_strlen(file);
-	if (len <= 3)
+	if (ft_strnstr(file, ".cub", ft_strlen(file)) == 0)
 		return (1);
-	ending = len - 4;
-	i = 0;
-	while (i < ending)
-	{
-		file[i];
-		i++;
-	}
-	if (ft_strncmp(*file, ".cub", 4) != 0)
-		return (1);
+	res = ft_strnstr(file, ".cub", ft_strlen(file));
+	if (ft_strlen(res) == 4)
+		return (0);
 	return (0);
 }
 
@@ -118,7 +109,6 @@ static void check_doubles(t_data *data)
 int input_validation(t_data *data, char *file)
 {
 	int fd;
-	int i;
 	char *line;
 
 	if (format_validation(file) == 1)
@@ -127,7 +117,6 @@ int input_validation(t_data *data, char *file)
 	if (fd < 0)
 		err_msg("Opening the file\n");
 	init_data(data);
-	i = 0;
 	while (1)
 	{
 		line = get_next_line_exit(fd);
@@ -136,7 +125,6 @@ int input_validation(t_data *data, char *file)
 		if (parse_line(data, line) == 1)
 			return (free(line), close(fd), 1); // or exit??
 		free(line);
-		i++;
 	}
 	close(fd);
 	check_doubles(data);

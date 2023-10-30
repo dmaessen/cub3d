@@ -10,7 +10,10 @@ HEADERS = -I ./include -I MLX42/include -I libft/
 
 LIB = MLX42/build/libmlx42.a -lglfw3 -framework Cocoa -framework OpenGL -framework IOKit $(LIBFT)
 
-SRC =  main.c \
+SRC =  src/main.c \
+	src/parsing/parse_input.c src/parsing/parse_map.c \
+	src/utils/error_msg.c src/utils/free.c src/utils/parsing_utils.c \
+
 
 OBJ = ${SRC:.c=.o}
 OBJ_DIR := obj/
