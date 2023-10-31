@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 10:41:44 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/10/31 12:56:18 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/10/31 15:13:14 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ int main(int argc, char **argv)
 	if (input_validation(data, argv[1]) == 0)
 	{
 		printf("valid input\n"); // to rm
-		//if (map_validation())
+		if (map_validation(data, argv[1]) == 0)
+			printf("valid map\n"); // to rm
 			// debating if need to check if the path to textures are valid
 			// meaning the map is valid
 			// so mlx can be initalized

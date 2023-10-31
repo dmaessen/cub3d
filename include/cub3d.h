@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 10:43:40 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/10/31 12:22:53 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/10/31 16:11:53 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,10 @@
 # include "../libft/libft.h"
 # include "../MLX42/include/MLX42/MLX42.h"
 # include "../MLX42/include/MLX42/MLX42_Input.h"
+
+/* defines to help set values for functions that validates the map */
+# define MAP_CHAR "01NSEW"
+# define MAP_POS "NSEW"
 
 /**
  * input with regards to the textures to use for the walls
@@ -48,19 +52,34 @@ typedef struct s_colors
 }t_colors;
 
 /**
+ * input with regards to the colors
+ * @param c_color R,G,B formatted color for the ceilling
+ * @param f_color R,G,B formatted color for the floor
+ */
+typedef struct s_data_input
+{
+	bool	player;
+	int		nb_lines;
+}t_data_input;
+
+/**
  * Main struct with all the information that is needed to run
  * @param 
  */
 typedef struct s_data
 {
- 	t_textures 	*textures;
-	t_colors	*colors;
+ 	t_textures 		*textures;
+	t_colors		*colors;
+	t_data_input	*input;
+
 }t_data;
 
 /* PARSING */
 int		input_validation(t_data *data, char *file);
 int		parse_line(t_data *data, char *line);
 void	add_data(t_data *data, char **str, int i);
+
+int		map_validation(t_data *data, char *file);
 
 
 #endif

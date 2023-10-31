@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 10:41:23 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/10/31 12:55:38 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/10/31 15:41:11 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,9 @@ static void init_data(t_data *data)
 	data->colors->f_color_b = -1;
 	data->colors->f_color_g = -1;
 	data->colors->f_color_r = -1;
+	data->input = ft_calloc(1, sizeof(t_data_input));
+	if (!data->input)
+		err_msg("Calloc failed\n");
 }
 
 static void split_colorcode(t_data *data, char *color, int id)
@@ -177,11 +180,14 @@ int input_validation(t_data *data, char *file)
 	if (fd < 0)
 		err_msg("Opening the file\n");
 	init_data(data);
+	data->input->nb_lines = 0;
 	while (1)
 	{
 		line = get_next_line_exit(fd);
 		if (line == NULL)
 			break;
+		if (ft_strcmp(line, "\n\0") != 0) // is this enough or we need spaces here too??
+			data->input->nb_lines++;
 		if (parse_line(data, line) == 1)
 			return (free(line), close(fd), 1); // or exit??
 		free(line);

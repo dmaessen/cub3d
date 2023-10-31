@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 10:41:34 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/10/31 12:23:48 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/10/31 15:41:24 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,5 @@ void free_struct(t_data *data) // something else to free here??
 	data->textures->ea_texture = NULL;
 	free(data->textures);
 	free(data->colors);
+	free(data->input);
 }
