@@ -6,11 +6,12 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 17:29:36 by dmaessen          #+#    #+#             */
-/*   Updated: 2022/10/27 16:18:05 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/10/31 12:54:59 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <limits.h>
 
 int	ft_atoi(const char *str)
 {
@@ -33,6 +34,8 @@ int	ft_atoi(const char *str)
 	while (str[i] >= '0' && str[i] <= '9')
 	{
 		nb = (nb * 10) + (str[i] - 48);
+		if (nb > INT_MAX)
+			return (-1);
 		i++;
 	}
 	return (sign * nb);

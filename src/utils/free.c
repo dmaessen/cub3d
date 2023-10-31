@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   free.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/31 10:41:34 by dmaessen          #+#    #+#             */
+/*   Updated: 2023/10/31 12:23:48 by dmaessen         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/cub3d.h"
 #include "../include/utils.h"
 
@@ -24,8 +36,6 @@ void free_struct(t_data *data) // something else to free here??
 	data->textures->we_texture = NULL;
 	free(data->textures->ea_texture);
 	data->textures->ea_texture = NULL;
-	free(data->colors->f_color);
-	data->colors->f_color = NULL;
-	free(data->colors->c_color);
-	data->colors->c_color = NULL;
+	free(data->textures);
+	free(data->colors);
 }

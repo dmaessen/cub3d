@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub3d.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/31 10:43:40 by dmaessen          #+#    #+#             */
+/*   Updated: 2023/10/31 12:22:53 by dmaessen         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef CUB3D_H
 # define CUB3D_H
 
@@ -27,8 +39,12 @@ typedef struct s_textures
  */
 typedef struct s_colors
 {
-	char *f_color;
-	char *c_color;
+	int f_color_r;
+	int f_color_g;
+	int f_color_b;
+	int c_color_r;
+	int c_color_g;
+	int c_color_b;
 }t_colors;
 
 /**
