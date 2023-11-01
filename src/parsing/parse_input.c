@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 10:41:23 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/10/31 15:41:11 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/11/01 16:55:38 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,33 +19,27 @@
 
 static void init_data(t_data *data)
 {
-	data->textures = ft_calloc(1, sizeof(t_textures));
-	if (!data->textures)
-		err_msg("Calloc failed\n");
-	data->textures->no_texture = ft_strdup("");
+	data->textures = calloc_exit(1, sizeof(t_textures));
+	data->textures->no_texture = ft_strdup("-1");
 	if (!data->textures->no_texture)
 		err_msg("Malloc failed\n");
-	data->textures->so_texture = ft_strdup("");
+	data->textures->so_texture = ft_strdup("-1");
 	if (!data->textures->so_texture)
 		err_msg("Malloc failed\n");
-	data->textures->we_texture = ft_strdup("");
+	data->textures->we_texture = ft_strdup("-1");
 	if (!data->textures->we_texture)
 		err_msg("Malloc failed\n");
-	data->textures->ea_texture = ft_strdup("");
+	data->textures->ea_texture = ft_strdup("-1");
 	if (!data->textures->ea_texture)
 		err_msg("Malloc failed\n");
-	data->colors = ft_calloc(1, sizeof(t_colors));
-	if (!data->colors)
-		err_msg("Calloc failed\n");
+	data->colors = calloc_exit(1, sizeof(t_colors));
 	data->colors->c_color_b = -1;
 	data->colors->c_color_g = -1;
 	data->colors->c_color_r = -1;
 	data->colors->f_color_b = -1;
 	data->colors->f_color_g = -1;
 	data->colors->f_color_r = -1;
-	data->input = ft_calloc(1, sizeof(t_data_input));
-	if (!data->input)
-		err_msg("Calloc failed\n");
+	data->input = calloc_exit(1, sizeof(t_data_input));
 }
 
 static void split_colorcode(t_data *data, char *color, int id)
@@ -84,18 +78,29 @@ void add_data(t_data *data, char **str, int i)
 	if (ft_strncmp(str[i], "F", 1) == 0)
 		if (str[i+1])
 			split_colorcode(data, str[i+1], 2);
-	if (ft_strncmp(str[i], "NO", 2) == 0)
+	if (ft_strncmp(str[i], "NO", 2) == 0 && str[i+1])
+	{
 		data->textures->no_texture = ft_strdup(str[i+1]);
-	if (ft_strncmp(str[i], "SO", 2) == 0)
+		check_image(data->textures->no_texture);
+	}
+	if (ft_strncmp(str[i], "SO", 2) == 0 && str[i+1])
+	{
 		data->textures->so_texture = ft_strdup(str[i+1]);
-	if (ft_strncmp(str[i], "WE", 2) == 0)
+		check_image(data->textures->so_texture);
+	}
+	if (ft_strncmp(str[i], "WE", 2) == 0 && str[i+1])
+	{
 		data->textures->we_texture = ft_strdup(str[i+1]);
-	if (ft_strncmp(str[i], "EA", 2) == 0)
+		check_image(data->textures->we_texture);
+	}
+	if (ft_strncmp(str[i], "EA", 2) == 0 && str[i+1])
+	{
 		data->textures->ea_texture = ft_strdup(str[i+1]);
+		check_image(data->textures->ea_texture);
+	}
 	if (!data->textures->no_texture || !data->textures->so_texture 
 		|| !data->textures->we_texture || !data->textures->ea_texture)
 			err_msg("Malloc failed\n");
-	// check if the path exists ?
 }
 
 int parse_line(t_data *data, char *line)
@@ -106,6 +111,8 @@ int parse_line(t_data *data, char *line)
 	str = ft_split(line, ' ');
 	if (!str)
 		err_msg("Spliting line\n");
+	
+	//printf("str0 == %s str1 == %s str2 == %s\n", str[0], str[1], str[2]); // to rm
 	i = 0;
 	while (str[i])
 	{
@@ -123,16 +130,25 @@ static int format_validation(char *file)
 {
 	char	*res;
 
-	if (ft_strnstr(file, ".cub", ft_strlen(file)) == 0)
+	if (ft_strlen(file) < 4)
 		return (1);
-	res = ft_strnstr(file, ".cub", ft_strlen(file));
-	if (ft_strlen(res) == 4)
-		return (0);
+	res = ft_substr(file, ft_strlen(file) - 4, 4);
+	if (!res)
+		err_msg("Malloc failed.\n");
+	if (ft_strcmp(res, ".cub") != 0)
+		return (free(res), 1);
+	free(res);
 	return (0);
 }
 
 static void validate_colors(t_colors *colors)
 {
+	if (colors->c_color_b == -1 || colors->c_color_g == -1
+		|| colors->c_color_r == -1)
+		err_msg("Color for the ceiling missing.\n");
+	if (colors->f_color_b == -1 || colors->f_color_g == -1
+		|| colors->f_color_r == -1)
+		err_msg("Color for the floor missing.\n");
 	if ((colors->c_color_b < 0) || (colors->c_color_b > 255) 
 		|| (colors->c_color_r < 0) || (colors->c_color_r > 255) 
 		|| (colors->c_color_g < 0) || (colors->c_color_g > 255))
@@ -149,6 +165,14 @@ static void validate_colors(t_colors *colors)
 
 static void check_doubles(t_data *data)
 {
+	if (ft_strcmp(data->textures->no_texture, "-1") == 0)
+		err_msg("NO texture missing.\n");
+	if (ft_strcmp(data->textures->so_texture, "-1") == 0)
+		err_msg("SO texture missing.\n");
+	if (ft_strcmp(data->textures->we_texture, "-1") == 0)
+		err_msg("WE texture missing.\n");
+	if (ft_strcmp(data->textures->ea_texture, "-1") == 0)
+		err_msg("EA texture missing.\n");
 	if (ft_strcmp(data->textures->no_texture, data->textures->so_texture) == 0
 	&& ft_strlen(data->textures->no_texture) == ft_strlen(data->textures->so_texture))
 		err_msg("The textures of NO and SO need to be different.\n");
@@ -167,6 +191,47 @@ static void check_doubles(t_data *data)
 	if (ft_strcmp(data->textures->we_texture, data->textures->ea_texture) == 0
 	&& ft_strlen(data->textures->we_texture) == ft_strlen(data->textures->ea_texture))
 		err_msg("The textures of WE and EA need to be different.\n");
+}
+
+// void check_image(char *path)
+// {
+// 	char	*res;
+
+// 	if (ft_strlen(path) < 4) // 5 then
+// 		err_msg("Wrong texture extension, only .png and .jpg supported\n");
+// 	printf("len == %zu // %s\n", ft_strlen(path), path); // to rm
+// 	if (path[ft_strlen(path) - 1] == '\n')
+// 		res = ft_substr(path, ft_strlen(path) - 5, 4);
+// 	else
+// 		res = ft_substr(path, ft_strlen(path) - 4, 4); // PROB IF MORE THAN 1 NEWLIN BUT PRBLEM FOR LATER -- do strrchr and res == the 4 chars
+// 	printf("res == %s\n", res); // to rm
+// 	if (ft_strcmp(res, ".png") != 0 && ft_strcmp(res, ".jpg") != 0)
+// 	{
+// 		free(res);
+// 		printf("you??\n");
+// 		err_msg("Wrong texture extension, only .png and .jpg supported\n");
+// 	}
+// 	free(res);
+// }
+
+void check_image(char *path)
+{
+	char	*res;
+	char	*pos; // to free this one add a new char* to ass it on..
+
+	pos = ft_strrchr(path, '.');
+	if (ft_strlen(path) < 4 || ft_strlen(pos) < 4 || pos == NULL)
+		err_msg("Wrong texture extension, only .png and .jpg supported\n");
+	while (ft_strchr(pos, '\n') != 0)
+		pos = ft_strtrim(pos, "\n");
+	res = ft_substr(pos, 0, ft_strlen(pos));
+	if (ft_strcmp(res, ".png") != 0 && ft_strcmp(res, ".jpg") != 0)
+	{
+		free(res);
+		err_msg("Wrong texture extension, only .png and .jpg supported\n");
+	}
+	//free(pos);
+	free(res);
 }
 
 int input_validation(t_data *data, char *file)

@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 10:43:43 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/10/31 10:43:48 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/11/01 13:18:41 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,5 +40,18 @@ void	free_struct(t_data *data);
  * @param s2 string 2 to be compared
  */
 int		ft_strcmp(const char *s1, const char *s2);
+
+/**
+ * The calloc() function contiguously allocates enough space for count
+ * objects that are size bytes of memory each and returns a pointer to the
+ * allocated memory.  The allocated memory is filled with bytes of value zero.
+ * If successful, calloc(), malloc(), realloc(), reallocf(), and valloc()
+ * functions return a pointer to allocated memory.  If there is an error,
+ * they return a NULL pointer and set errno to ENOMEM.
+ * this version of calloc exits with 1 if malloc fails to allocate
+ * @param count 
+ * @param size
+ */
+void	*calloc_exit(size_t count, size_t size);
 
 #endif

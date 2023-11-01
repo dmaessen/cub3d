@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 10:43:40 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/10/31 16:11:53 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/11/01 15:19:27 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ typedef struct s_data_input
 {
 	bool	player;
 	int		nb_lines;
+	char	**parsed_map; // needs to be freed at some point
 }t_data_input;
 
 /**
@@ -78,8 +79,10 @@ typedef struct s_data
 int		input_validation(t_data *data, char *file);
 int		parse_line(t_data *data, char *line);
 void	add_data(t_data *data, char **str, int i);
+void	check_image(char *path);
 
 int		map_validation(t_data *data, char *file);
+char	*rm_spaces(char *line);
 
 
 #endif

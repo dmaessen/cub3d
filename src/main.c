@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 10:41:44 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/10/31 15:13:14 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/11/01 13:19:26 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,7 @@ int main(int argc, char **argv)
 	//mlx_t *mlx;
 	t_data *data;
 
-	data = ft_calloc(1, sizeof(t_data));
-	if (!data)
-		err_msg("Calloc failled to init the data struct.\n");
+	data = calloc_exit(1, sizeof(t_data));
 	if (argc != 2)
 		err_msg("Invalid number of arguments.\n");
 	if (input_validation(data, argv[1]) == 0)

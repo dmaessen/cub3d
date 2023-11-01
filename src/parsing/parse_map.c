@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 10:41:28 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/10/31 17:23:26 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/11/01 15:40:06 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,9 @@
 #include "../include/utils.h"
 #include <fcntl.h>
 #include <stdlib.h>
+#include <stdio.h>
 
-static char *rm_map_spaces(char *line)
+char *rm_spaces(char *line)
 {
 	char *newline;
 	int i;
@@ -27,13 +28,11 @@ static char *rm_map_spaces(char *line)
 	spaces = 0;
 	while (line[i])
 	{
-		if (line[i] == ' ')
+		if (line[i] == ' ') //something needed here  && !line[i + 1]??
 			spaces++;
 		i++;
 	}
-	newline = ft_calloc((ft_strlen(line) - spaces + 1), sizeof(char));
-	if (!newline)
-		err_msg("Calloc failed.\n");
+	newline = calloc_exit((ft_strlen(line) - spaces + 1), sizeof(char));
 	i = 0;
 	j = 0;
 	while (line[i])
@@ -47,6 +46,7 @@ static char *rm_map_spaces(char *line)
 		else
 			i++;
 	}
+	newline[j] = '\0';
 	return (newline);
 }
 
@@ -55,14 +55,13 @@ static int parse_map(t_data *data, char *line, int i)
 	char *newline;
 	size_t	j;
 
-	// MAYBE GOOD PLAN INSTEAD OF SPLITTING WRITE A "TRIM" FUNCTION TO RM ALL SPACES
-	// SO TO HAVE ONE CONTINUOUS LINE WITHOUT SPACES
-	newline = rm_map_spaces(line); // can this go wrong somehow?
+	newline = rm_spaces(line);
 	j = 0;
 	if (i > 6)
 	{
-		printf("%s", newline);
-		if (i == 7 || i == data->input->nb_lines) // if first or last line of map
+		// printf("%s", line); // to rm
+		data->input->parsed_map[i - 7] = calloc_exit(ft_strlen(line) + 1, sizeof(char));
+		if (i == 7 || i == data->input->nb_lines)
 		{
 			while (newline[j])
 			{
@@ -82,13 +81,13 @@ static int parse_map(t_data *data, char *line, int i)
 				}
 				else
 				{
-					if ((newline[j] != 'N' || newline[j] != 'S' || newline[j] != 'W' 
-					|| newline[j] != 'E' || newline[j] != 48 || newline[j] != 49 || newline[j] != '\0')) 
+					if ((newline[j] != 'N' && newline[j] != 'S' && newline[j] != 'W' 
+					&& newline[j] != 'E' && newline[j] != 48 && newline[j] != 49) && newline[j] != '\0' && newline[j] != '\n')
 						err_msg("Invalid map, unidentified character in the map\n"); // or return here??
-					if ((newline[j] == 'N' || newline[j] == 'S' || newline[j] == 'W' 
+					else if ((newline[j] == 'N' || newline[j] == 'S' || newline[j] == 'W' 
 					|| newline[j] == 'E') && data->input->player == true)
 						err_msg("Invalid map, only one player allowed in the map\n"); // or return here??
-					if ((newline[j] == 'N' || newline[j] == 'S' || newline[j] == 'W' 
+					else if ((newline[j] == 'N' || newline[j] == 'S' || newline[j] == 'W' 
 					|| newline[j] == 'E') && data->input->player == false)
 						data->input->player = true;
 				}
@@ -111,6 +110,7 @@ int	map_validation(t_data *data, char *file)
 	if (fd < 0)
 		err_msg("Opening the file\n");
 	data->input->player = false;
+	data->input->parsed_map = calloc_exit((data->input->nb_lines - 6) + 1, sizeof(char *));
 	i = 0;
 	while (1)
 	{

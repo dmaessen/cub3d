@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 10:41:41 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/10/31 10:41:42 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/11/01 13:16:20 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,4 +27,21 @@ int ft_strcmp(const char *s1, const char *s2)
 			i++;
 	}
 	return (0);
+}
+
+void	*calloc_exit(size_t count, size_t size)
+{
+	size_t	i;
+	char	*ptr;
+
+	ptr = malloc(count * size);
+	if (!ptr)
+		err_msg("Calloc failed.\n");
+	i = 0;
+	while (i < count * size)
+	{
+		ptr[i] = '\0';
+		i++;
+	}
+	return (ptr);
 }
