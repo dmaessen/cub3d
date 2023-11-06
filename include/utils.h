@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 10:43:43 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/11/01 13:18:41 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/11/06 15:17:04 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ void	free_struct(t_data *data);
  * @param s2 string 2 to be compared
  */
 int		ft_strcmp(const char *s1, const char *s2);
-
 /**
  * The calloc() function contiguously allocates enough space for count
  * objects that are size bytes of memory each and returns a pointer to the
@@ -53,5 +52,11 @@ int		ft_strcmp(const char *s1, const char *s2);
  * @param size
  */
 void	*calloc_exit(size_t count, size_t size);
+/**
+ * to facilitate the parsing of the map all the spaces are removed to be able to identify
+ * unwanted characters in the map
+ * @param line line read from the input file
+ */
+char	*rm_spaces(char *line);
 
 #endif

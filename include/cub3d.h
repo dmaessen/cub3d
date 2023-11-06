@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 10:43:40 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/11/01 15:19:27 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/11/06 16:24:15 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,13 @@
 # include "../MLX42/include/MLX42/MLX42.h"
 # include "../MLX42/include/MLX42/MLX42_Input.h"
 
-/* defines to help set values for functions that validates the map */
-# define MAP_CHAR "01NSEW"
-# define MAP_POS "NSEW"
+typedef enum s_PLAYER_FACING
+{
+	P_NORTH,
+	P_SOUTH,
+	P_WEST,
+	P_EAST,
+}t_PLAYER_FACING;
 
 /**
  * input with regards to the textures to use for the walls
@@ -59,6 +63,7 @@ typedef struct s_colors
 typedef struct s_data_input
 {
 	bool	player;
+	t_PLAYER_FACING		player_facing; 
 	int		nb_lines;
 	char	**parsed_map; // needs to be freed at some point
 }t_data_input;
@@ -76,13 +81,105 @@ typedef struct s_data
 }t_data;
 
 /* PARSING */
+/**
+ * first checks if the extension of the file is valid
+ * then opens the file and initalisizes all textures/colors to -1
+ * then reads into the file line by line with getnextline
+ * sending each read line to parse_line(), checking each time if all went well
+ * then closes the file
+ * and checks if the textures and colors are valid
+ * @param data main struct
+ * @param file file hosting the map and texture/colors
+ */
 int		input_validation(t_data *data, char *file);
+/**
+ * first splits the line on spaces
+ * then loops through the double array searching for the texture/colors
+ * identifers and sends it to add_data()
+ * frees the double array
+ * @param data main struct
+ * @param file file hosting the map and texture/colors
+ */
 int		parse_line(t_data *data, char *line);
+/**
+ * adds the argv coming after the texture/color identifer (NO/SO/EA/WE/C/F) 
+ * to the struct, saving it for later
+ * @param data main struct
+ * @param str splitted map input
+ * @param i position of the texture/color identifier (NO/SO/EA/WE/C/F) in str
+ */
 void	add_data(t_data *data, char **str, int i);
-void	check_image(char *path);
 
-int		map_validation(t_data *data, char *file);
-char	*rm_spaces(char *line);
+/**
+ * first opens the input file and mallocs a double arrray to host the map
+ * then reads the file line by line with getnextline and sends each line to parse_map()
+ * when the whole file has been read, its being closed
+ * and then we proceed to is_walkable_path() (ensuring the player can at least make one step in the map)
+ * then we parse_spaces() (to check if all the spaces in the map are surrounded by walls)
+ * @param data main struct
+ * @param file file hosting the map and texture/colors
+ */
+int		map_validation(t_data *data, char *file, int i);
+
+/**
+ * loops through the map looking for the players position, when identified sends it
+ * to check_walkable()
+ * @param data main struct
+ */
+void	is_walkable_path(t_data *data);
+/**
+ * loops through the map looking for the row/line above and below the given row 
+ * to check if there is a 0/empty space meaning the player can make a step
+ * then we check if the amount of 0/empty spaces -- needs to be at least one
+ * else an error message indicates that there is no walkable path
+ * @param map inputed map
+ * @param row row in the map to check
+ * @param id start position of the player on the map
+ */
+void	check_walkable(char **map, int row, int id);
+/**
+ * loops through the map, each time it encounters a space if redirect to check_line()
+ * if it returns 1 then displays an error message that the map is not properly surrounded by walls
+ * @param data main struct
+ */
+void	parse_spaces(t_data *data);
+/**
+ * loops through the map until its on the given row, and then checks at the position pos
+ * to see if its not a 0/N/S/E/W at that position, if that would be the case then it returns 1
+ * meaning the map is not properly surrounded by walls. else if all good returns 0
+ * @param map
+ * @param row row in the map to check
+ * @param pos position of the character to check
+ */
+int		check_line(char **map, int row, int pos);
+
+/**
+ * checks the extension of the file, if its ending in .cub
+ * if ending in .cub returns 0, if not returns 1
+ * @param file input file with the map
+ */
+int		format_validation(char *file);
+/**
+ * checks the color codes for the floor and ceiling are valid
+ * if they're not throws an error message saying so
+ * @param colors struct hosting the color codes
+ */
+void	validate_colors(t_colors *colors);
+/**
+ * first checks if the path to the texture has a dot/. as well as the lenght of the path
+ * if already invali at this point throws an error message
+ * then proceeds to check if the path has a .png or .jpg format else throws an error message
+ * @param path path to texture
+ */
+void	check_image(char *path);
+/**
+ * first checks all the textures are present in the struct, else throws an error message mentionning the texture
+ * that is missing
+ * if all four textures are there, checks if they are all different from each other, if not throws
+ * an error message about two textures being the same
+ * @param t struct hosting the NO/SO/WE/EA textures
+ */
+void	check_doubles(t_textures *t);
 
 
 #endif

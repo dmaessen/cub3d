@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 10:41:44 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/11/01 13:19:26 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/11/06 16:09:54 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,11 @@ int main(int argc, char **argv)
 	data = calloc_exit(1, sizeof(t_data));
 	if (argc != 2)
 		err_msg("Invalid number of arguments.\n");
-	if (input_validation(data, argv[1]) == 0)
+	if (input_validation(data, argv[1]) == 0) // have something for the error, no??
 	{
 		printf("valid input\n"); // to rm
-		if (map_validation(data, argv[1]) == 0)
+		if (map_validation(data, argv[1], 0) == 0) // have something for the error, no??
 			printf("valid map\n"); // to rm
-			// debating if need to check if the path to textures are valid
-			// meaning the map is valid
 			// so mlx can be initalized
 	}
 	// something else to free??

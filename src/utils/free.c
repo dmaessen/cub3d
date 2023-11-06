@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 10:41:34 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/11/01 12:31:29 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/11/06 15:43:40 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	free_str(char **str)
 	free(str);
 }
 
-void free_struct(t_data *data) // something else to free here??
+void	free_struct(t_data *data)
 {
 	free(data->textures->no_texture);
 	data->textures->no_texture = NULL;
@@ -39,5 +39,5 @@ void free_struct(t_data *data) // something else to free here??
 	free(data->textures);
 	free(data->colors);
 	free(data->input);
-	free_str(data->input->parsed_map); // or elsewhere??
+	free_str(data->input->parsed_map);
 }

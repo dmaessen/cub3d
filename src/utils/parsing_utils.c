@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 10:41:41 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/11/01 13:16:20 by dmaessen         ###   ########.fr       */
+/*   Updated: 2023/11/06 15:43:15 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "../include/utils.h"
 #include <string.h>
 
-int ft_strcmp(const char *s1, const char *s2)
+int	ft_strcmp(const char *s1, const char *s2)
 {
 	int	i;
 
@@ -44,4 +44,33 @@ void	*calloc_exit(size_t count, size_t size)
 		i++;
 	}
 	return (ptr);
+}
+
+char	*rm_spaces(char *line)
+{
+	char	*newline;
+	int		i;
+	int		spaces;
+	int		j;
+
+	i = -1;
+	spaces = 0;
+	while (line[++i])
+	{
+		if (line[i] == ' ')
+			spaces++;
+	}
+	newline = calloc_exit((ft_strlen(line) - spaces + 1), sizeof(char));
+	i = -1;
+	j = 0;
+	while (line[++i])
+	{
+		if (line[i] != ' ')
+		{
+			newline[j] = line[i];
+			j++;
+		}
+	}
+	newline[j] = '\0';
+	return (newline);
 }
