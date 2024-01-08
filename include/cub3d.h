@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 10:43:40 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/11/06 16:24:15 by dmaessen         ###   ########.fr       */
+/*   Updated: 2024/01/08 15:27:49 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,9 @@
 # include "../libft/libft.h"
 # include "../MLX42/include/MLX42/MLX42.h"
 # include "../MLX42/include/MLX42/MLX42_Input.h"
+
+#define WIDTH 1024
+#define HEIGHT 1024
 
 typedef enum s_PLAYER_FACING
 {
@@ -56,9 +59,7 @@ typedef struct s_colors
 }t_colors;
 
 /**
- * input with regards to the colors
- * @param c_color R,G,B formatted color for the ceilling
- * @param f_color R,G,B formatted color for the floor
+ * 
  */
 typedef struct s_data_input
 {
@@ -79,6 +80,21 @@ typedef struct s_data
 	t_data_input	*input;
 
 }t_data;
+
+/**
+ * 
+ */
+typedef struct s_m
+{
+	double	posX; // position vector of player
+	double	posY;
+	double dirX; // direction vector of player
+	double dirY;
+	double planeX; // camera plane of player
+	double planeY;
+	double time; // to calculate time between frames
+	double oldtime;
+}t_m;
 
 /* PARSING */
 /**
@@ -180,6 +196,14 @@ void	check_image(char *path);
  * @param t struct hosting the NO/SO/WE/EA textures
  */
 void	check_doubles(t_textures *t);
+
+
+
+
+/* RAYCASTING */
+int raycaster_start(t_data *data);
+void pos_player(t_data *data, t_m *m);
+//void load_textures(t_data *data, mlx_t *mlx);
 
 
 #endif

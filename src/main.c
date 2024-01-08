@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 10:41:44 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/11/06 16:09:54 by dmaessen         ###   ########.fr       */
+/*   Updated: 2024/01/08 15:21:30 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,10 @@ int main(int argc, char **argv)
 		printf("valid input\n"); // to rm
 		if (map_validation(data, argv[1], 0) == 0) // have something for the error, no??
 			printf("valid map\n"); // to rm
+		// else ??
+		if (raycaster_start(data) == 0)
+			printf("WORKS\n"); // to remove
+		// else
 			// so mlx can be initalized
 	}
 	// something else to free??

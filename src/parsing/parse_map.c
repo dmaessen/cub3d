@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 10:41:28 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/11/06 16:09:17 by dmaessen         ###   ########.fr       */
+/*   Updated: 2024/01/08 13:14:07 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ static void	save_line(t_data *data, char *line, int row)
 		i++;
 	}
 	data->input->parsed_map[row][i] = '\0';
+	printf("%s", data->input->parsed_map[row]); // to rm
 }
 
 static void	check_middlemap(t_data *data, char *line, size_t j)
