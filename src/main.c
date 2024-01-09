@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: domi <domi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 10:41:44 by dmaessen          #+#    #+#             */
-/*   Updated: 2024/01/08 15:21:30 by dmaessen         ###   ########.fr       */
+/*   Updated: 2024/01/09 15:39:47 by domi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 int main(int argc, char **argv)
 {
-	//mlx_t *mlx;
+	// mlx_t *mlx;
 	t_data *data;
 
 	data = calloc_exit(1, sizeof(t_data));
@@ -28,10 +28,14 @@ int main(int argc, char **argv)
 		if (map_validation(data, argv[1], 0) == 0) // have something for the error, no??
 			printf("valid map\n"); // to rm
 		// else ??
-		if (raycaster_start(data) == 0)
-			printf("WORKS\n"); // to remove
-		// else
-			// so mlx can be initalized
+		// mlx = mlx_init(WIDTH, HEIGHT, "cub3D", true); // or do we want to make resize false??
+    	// if (!mlx)
+        // 	return (err_msg("init mlx\n"), 1);
+		raycaster_start(data); 
+		//mlx_loop_hook(mlx, hook_esc, mlx); // look into the needed hooks
+		// mlx_loop(mlx);
+		// mlx_terminate(mlx); // needed??
+		// exit(EXIT_SUCCESS);
 	}
 	// something else to free??
 	free_struct(data);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: domi <domi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 10:43:40 by dmaessen          #+#    #+#             */
-/*   Updated: 2024/01/08 15:27:49 by dmaessen         ###   ########.fr       */
+/*   Updated: 2024/01/09 16:48:47 by domi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,9 @@
 
 #define WIDTH 1024
 #define HEIGHT 1024
+
+#define texWidth 64
+#define texHeight 64
 
 typedef enum s_PLAYER_FACING
 {
@@ -84,7 +87,7 @@ typedef struct s_data
 /**
  * 
  */
-typedef struct s_m
+typedef struct s_map
 {
 	double	posX; // position vector of player
 	double	posY;
@@ -94,7 +97,33 @@ typedef struct s_m
 	double planeY;
 	double time; // to calculate time between frames
 	double oldtime;
-}t_m;
+	double cameraX; // x coordinate in camera space
+	double rayDirX;
+	double rayDirY;
+	int mapX;
+    int mapY;
+    double sideDistX; // length of ray from current position to next x or y-side
+    double sideDistY; 
+    double deltaDistX; // length of ray from one x or y-side to next x or y-side
+    double deltaDistY;
+    double perpWallDist;      
+    int stepX; //what direction to step in x or y-direction (either +1 or -1)
+    int stepY;
+    int hit; //was there a wall hit?
+    int side; //was a NS or a EW wall hit?
+	int lineHeight; // to know the line hieght to draw on screen
+	int picth;
+	int drawStart;
+	int drawEnd;
+	int pitch;
+	int addTexture;
+	double wallX; // where the wall was hit
+	int textureX; // x-y corrdinate on texture
+	int textureY;
+	double step;
+	double texturePos;
+	uint32_t color;
+}t_map;
 
 /* PARSING */
 /**
@@ -202,7 +231,7 @@ void	check_doubles(t_textures *t);
 
 /* RAYCASTING */
 int raycaster_start(t_data *data);
-void pos_player(t_data *data, t_m *m);
+void pos_player(t_data *data, t_map *m);
 //void load_textures(t_data *data, mlx_t *mlx);
 
 

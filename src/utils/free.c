@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free.c                                             :+:      :+:    :+:   */
+/*   free.C                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: domi <domi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 10:41:34 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/11/06 15:43:40 by dmaessen         ###   ########.fr       */
+/*   Updated: 2024/01/09 12:50:00 by domi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	free_str(char **str)
 	free(str);
 }
 
-void	free_struct(t_data *data)
+void	free_struct(t_data *data) // free t_map??
 {
 	free(data->textures->no_texture);
 	data->textures->no_texture = NULL;
