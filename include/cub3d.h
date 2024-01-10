@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: domi <domi@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 10:43:40 by dmaessen          #+#    #+#             */
-/*   Updated: 2024/01/09 16:48:47 by domi             ###   ########.fr       */
+/*   Updated: 2024/01/10 15:18:26 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,18 +73,6 @@ typedef struct s_data_input
 }t_data_input;
 
 /**
- * Main struct with all the information that is needed to run
- * @param 
- */
-typedef struct s_data
-{
- 	t_textures 		*textures;
-	t_colors		*colors;
-	t_data_input	*input;
-
-}t_data;
-
-/**
  * 
  */
 typedef struct s_map
@@ -124,6 +112,20 @@ typedef struct s_map
 	double texturePos;
 	uint32_t color;
 }t_map;
+
+/**
+ * Main struct with all the information that is needed to run
+ * @param 
+ */
+typedef struct s_data
+{
+ 	t_textures 		*textures;
+	t_colors		*colors;
+	t_data_input	*input;
+	t_map			*m;
+
+}t_data;
+
 
 /* PARSING */
 /**
@@ -230,7 +232,7 @@ void	check_doubles(t_textures *t);
 
 
 /* RAYCASTING */
-int raycaster_start(t_data *data);
+int raycaster_start(t_data *data, mlx_t *mlx);
 void pos_player(t_data *data, t_map *m);
 //void load_textures(t_data *data, mlx_t *mlx);
 

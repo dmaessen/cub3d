@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: domi <domi@student.42.fr>                  +#+  +:+       +#+         #
+#    By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/31 10:43:27 by dmaessen          #+#    #+#              #
-#    Updated: 2024/01/09 15:54:39 by domi             ###   ########.fr        #
+#    Updated: 2024/01/10 14:42:44 by dmaessen         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ LIB = MLX42/build/libmlx42.a -lglfw -framework Cocoa -framework OpenGL -framewor
 SRC =  src/main.c \
 	src/parsing/parse_input.c src/parsing/parse_map.c src/parsing/parse_spaces.c src/parsing/parse_checks.c \
 	src/utils/error_msg.c src/utils/free.c src/utils/parsing_utils.c \
-	src/raycasting/raycaster.c \
+	src/raycasting/raycaster.c src/raycasting/move.c \
 
 
 OBJ = ${SRC:.c=.o}

@@ -1,11 +1,11 @@
-NO ../textures/1.png
-SO ../textures/2.png  
-WE ../textures/3.png
+NO ../textures/a.png
+SO ../textures/b.png  
+WE ../textures/c.png
 
 
 F 255,100,0
 C 225,30,0
-EA ../textures/4.png
+EA ../textures/d.png
 
         1111111111111111111111111
         1000000000110000000000001
