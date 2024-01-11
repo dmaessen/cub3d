@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 13:15:24 by dmaessen          #+#    #+#             */
-/*   Updated: 2024/01/10 15:27:17 by dmaessen         ###   ########.fr       */
+/*   Updated: 2024/01/11 15:42:27 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,43 +20,43 @@
 
 uint32_t buffer[HEIGHT][WIDTH];
 
-static void alter_walls(t_data *data) 
-{
-    int i;
-    int j;
+// static void alter_walls(t_data *data) 
+// {
+//     int i;
+//     int j;
 
-    i = 0;
-    while (data->input->parsed_map[i])
-    {
-        j = 0;
-        while (data->input->parsed_map[i][j] && i == data->input->nb_lines - 6) // SO
-        {
-            if (data->input->parsed_map[i][j] == 1)
-                data->input->parsed_map[i][j] = '4';
-            j++;
-        }
-        i++; 
-    }
-    i = 0;
-    while (data->input->parsed_map[i])
-    {
-        j = 0;
-        while (data->input->parsed_map[i][j]) // SO
-        {
-            if ((j == 0 && data->input->parsed_map[i][j] != 0) 
-            || (data->input->parsed_map[i][j] != 0 && data->input->parsed_map[i][j - 1] == ' ')) 
-                data->input->parsed_map[i][j] = '2'; // WE
-            if (data->input->parsed_map[i][j] != 0 && (data->input->parsed_map[i][j + 1] == ' '
-            || data->input->parsed_map[i][j - 1] == '\n' || data->input->parsed_map[i][j - 1] == '\0')) 
-                data->input->parsed_map[i][j] = '3'; // EA
-            j++;
-        }
-        printf("%s",data->input->parsed_map[i]);
-        i++;
-    }
+//     i = 0;
+//     while (data->input->parsed_map[i])
+//     {
+//         j = 0;
+//         while (data->input->parsed_map[i][j] && i == data->input->nb_lines - 6) // SO
+//         {
+//             if (data->input->parsed_map[i][j] == 1)
+//                 data->input->parsed_map[i][j] = '4';
+//             j++;
+//         }
+//         i++; 
+//     }
+//     i = 0;
+//     while (data->input->parsed_map[i])
+//     {
+//         j = 0;
+//         while (data->input->parsed_map[i][j]) // SO
+//         {
+//             if ((j == 0 && data->input->parsed_map[i][j] != 0) 
+//             || (data->input->parsed_map[i][j] != 0 && data->input->parsed_map[i][j - 1] == ' ')) 
+//                 data->input->parsed_map[i][j] = '2'; // WE
+//             if (data->input->parsed_map[i][j] != 0 && (data->input->parsed_map[i][j + 1] == ' '
+//             || data->input->parsed_map[i][j - 1] == '\n' || data->input->parsed_map[i][j - 1] == '\0')) 
+//                 data->input->parsed_map[i][j] = '3'; // EA
+//             j++;
+//         }
+//         printf("%s",data->input->parsed_map[i]);
+//         i++;
+//     }
     
 
-}
+// }
 
 
 int raycaster_start(t_data *data, mlx_t *mlx) // , mlx_t *mlx
@@ -65,7 +65,7 @@ int raycaster_start(t_data *data, mlx_t *mlx) // , mlx_t *mlx
     data->m->time = 0;
     data->m->oldtime = 0;
     data->m->posX = 0;
-    pos_player(data, data->m);
+    pos_player(data);
     data->m->dirX = -1; // like this for testing but change based on facing
     data->m->dirY = 0;
     data->m->planeX = 0;
@@ -82,6 +82,22 @@ int raycaster_start(t_data *data, mlx_t *mlx) // , mlx_t *mlx
     
     //alter_walls(data);
     
+    mlx_image_t* img[4];
+    img[0] = mlx_texture_to_image(mlx, tex[0]);
+    img[1] = mlx_texture_to_image(mlx, tex[1]);
+    img[2] = mlx_texture_to_image(mlx, tex[2]);
+    img[3] = mlx_texture_to_image(mlx, tex[3]);
+	// if (!img[0] || !img[1] || !img[2] || !img[3])
+	// 	return (err_msg("loading img for textures\n"), 1);
+    
+    if (mlx_image_to_window(mlx, img[0], 0, 0) < 0)
+        return (err_msg("mlx_image_to_window\n"), 1);
+    if (mlx_image_to_window(mlx, img[1], 0, 0) < 0)
+        return (err_msg("mlx_image_to_window\n"), 1);
+    if (mlx_image_to_window(mlx, img[2], 0, 0) < 0)
+        return (err_msg("mlx_image_to_window\n"), 1);
+    if (mlx_image_to_window(mlx, img[3], 0, 0) < 0)
+        return (err_msg("mlx_image_to_window\n"), 1);
     
     int x;
     int y;
@@ -175,18 +191,18 @@ int raycaster_start(t_data *data, mlx_t *mlx) // , mlx_t *mlx
             {
                 data->m->textureY = (int)data->m->texturePos & (texHeight - 1); // cast text coordinate to int, and mask with the last in case of overflow
                 data->m->texturePos += data->m->step;
-                data->m->color = tex[data->m->addTexture];
+                //data->m->color = tex[data->m->addTexture];
                 //data->m->color = tex[data->m->addTexture][texHeight * data->m->textureX + data->m->textureY]; 
-                if (data->m->side == 1)
-                    data->m->color = (data->m->color >> 1) & 8355711;
-                buffer[y][x] = data->m->color;
+                // if (data->m->side == 1)
+                //     data->m->color = (data->m->color >> 1) & 8355711;
+                // buffer[y][x] = data->m->color;
                 y++;
             }   
             x++;
         }
         
         // FROM DRAWBUFFER()...
-        drawBuffer(buffer[0]); // LOOK WHAT THIS NEEDS TO DO OR IF BUILT_IN
+        //drawBuffer(buffer[0]); // LOOK WHAT THIS NEEDS TO DO OR IF BUILT_IN
         
         // mlx_image_t *img;
         // img = mlx_new_image(mlx, WIDTH, HEIGHT);
@@ -205,8 +221,6 @@ int raycaster_start(t_data *data, mlx_t *mlx) // , mlx_t *mlx
             y++;
         }
         
-        // IS THE TIME THING NEEDED?? DONT THINK SO
-        // ...
         
     }
     
@@ -219,7 +233,7 @@ int raycaster_start(t_data *data, mlx_t *mlx) // , mlx_t *mlx
     
 // }
 
-void pos_player(t_data *data, t_map *m)
+void pos_player(t_data *data)
 {
     int i;
     int col;

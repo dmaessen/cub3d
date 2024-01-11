@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 10:43:40 by dmaessen          #+#    #+#             */
-/*   Updated: 2024/01/10 15:18:26 by dmaessen         ###   ########.fr       */
+/*   Updated: 2024/01/11 15:30:38 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -233,8 +233,14 @@ void	check_doubles(t_textures *t);
 
 /* RAYCASTING */
 int raycaster_start(t_data *data, mlx_t *mlx);
-void pos_player(t_data *data, t_map *m);
+void pos_player(t_data *data);
 //void load_textures(t_data *data, mlx_t *mlx);
-
+void move(mlx_key_data_t keydata, void *param);
+void move_up(t_data *data);
+void move_down(t_data *data);
+void move_left(t_data *data);
+void move_right(t_data *data);
+void look_left(t_data *data);
+void look_right(t_data *data);
 
 #endif
