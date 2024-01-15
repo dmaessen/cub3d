@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycaster.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: domi <domi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 13:15:24 by dmaessen          #+#    #+#             */
-/*   Updated: 2024/01/11 15:42:27 by dmaessen         ###   ########.fr       */
+/*   Updated: 2024/01/15 15:55:13 by domi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,42 +62,51 @@ uint32_t buffer[HEIGHT][WIDTH];
 int raycaster_start(t_data *data, mlx_t *mlx) // , mlx_t *mlx
 {
     data->m = calloc_exit(1, sizeof(t_map)); // needed -- also free later then
-    data->m->time = 0;
-    data->m->oldtime = 0;
-    data->m->posX = 0;
-    pos_player(data);
-    data->m->dirX = -1; // like this for testing but change based on facing
-    data->m->dirY = 0;
+    // data->m->time = 0;
+    // data->m->oldtime = 0;
+    // data->m->posX = 0;
+    pos_player(data); // fills in posY and posX
+    dir_player(data); // 
+    // data->m->dirX = -1; // like this for testing but change based on facing
+    // data->m->dirY = 0;
+    data->m->angleFOV = 0.66; // which results in a 66degre angle for the Field of Vision
     data->m->planeX = 0;
-    data->m->planeY = 0.66; // which results in a 66degre angle for the Field of Vision
+    data->m->planeY = 0.66; 
     
     //load_textures(data, mlx);
-	mlx_texture_t* tex[4];
-	tex[0] = mlx_load_png(data->textures->no_texture);
-	tex[1] = mlx_load_png(data->textures->so_texture);
-	tex[2] = mlx_load_png(data->textures->we_texture);
-	tex[3] = mlx_load_png(data->textures->ea_texture);
-	// if (!tex[0] || !tex[1] || !tex[2] || !tex[3])
+    data->wall = malloc(4 * sizeof(t_wall));
+    if (!data->wall)
+        return (err_msg("malloc failed"), 1);
+	//mlx_texture_t* tex[4];
+	data->wall[0].tex = mlx_load_png(data->textures->no_texture);
+	data->wall[1].tex = mlx_load_png(data->textures->so_texture);
+	data->wall[2].tex = mlx_load_png(data->textures->we_texture);
+	data->wall[3].tex = mlx_load_png(data->textures->ea_texture);
+	// if (!data->wall->tex[0] || !data->wall->tex[1] || !data->wall->tex[2] || !data->wall->tex[3])
 	// 	return (err_msg("loading textures\n"), 1);
     
     //alter_walls(data);
     
-    mlx_image_t* img[4];
-    img[0] = mlx_texture_to_image(mlx, tex[0]);
-    img[1] = mlx_texture_to_image(mlx, tex[1]);
-    img[2] = mlx_texture_to_image(mlx, tex[2]);
-    img[3] = mlx_texture_to_image(mlx, tex[3]);
+    data->img = mlx_new_image(mlx, WIDTH, HEIGHT);
+    if (!data->img)
+        return (err_msg("mlx_new_image failed"), 1);
+    
+    // mlx_image_t* img[4];
+    // img[0] = mlx_texture_to_image(mlx, tex[0]);
+    // img[1] = mlx_texture_to_image(mlx, tex[1]);
+    // img[2] = mlx_texture_to_image(mlx, tex[2]);
+    // img[3] = mlx_texture_to_image(mlx, tex[3]);
 	// if (!img[0] || !img[1] || !img[2] || !img[3])
 	// 	return (err_msg("loading img for textures\n"), 1);
     
-    if (mlx_image_to_window(mlx, img[0], 0, 0) < 0)
-        return (err_msg("mlx_image_to_window\n"), 1);
-    if (mlx_image_to_window(mlx, img[1], 0, 0) < 0)
-        return (err_msg("mlx_image_to_window\n"), 1);
-    if (mlx_image_to_window(mlx, img[2], 0, 0) < 0)
-        return (err_msg("mlx_image_to_window\n"), 1);
-    if (mlx_image_to_window(mlx, img[3], 0, 0) < 0)
-        return (err_msg("mlx_image_to_window\n"), 1);
+    // if (mlx_image_to_window(mlx, img[0], 0, 0) < 0)
+    //     return (err_msg("mlx_image_to_window\n"), 1);
+    // if (mlx_image_to_window(mlx, img[1], 0, 0) < 0)
+    //     return (err_msg("mlx_image_to_window\n"), 1);
+    // if (mlx_image_to_window(mlx, img[2], 0, 0) < 0)
+    //     return (err_msg("mlx_image_to_window\n"), 1);
+    // if (mlx_image_to_window(mlx, img[3], 0, 0) < 0)
+    //     return (err_msg("mlx_image_to_window\n"), 1);
     
     int x;
     int y;
@@ -261,3 +270,26 @@ void pos_player(t_data *data)
     }
 }
 
+static void dir_player(t_data *data)
+{
+    if (data->input->player_facing == P_NORTH)
+    {
+        data->m->dirX = -1;
+        data->m->dirY = 0;
+    }
+    if (data->input->player_facing == P_SOUTH)
+    {
+        data->m->dirX = 1;
+        data->m->dirY = 0;
+    }
+    if (data->input->player_facing == P_EAST)
+    {
+        data->m->dirX = 0;
+        data->m->dirY = 1;
+    }
+    if (data->input->player_facing == P_WEST)
+    {
+        data->m->dirX = 0;
+        data->m->dirY = -1;
+    }
+}

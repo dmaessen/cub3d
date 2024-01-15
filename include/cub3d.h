@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: domi <domi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 10:43:40 by dmaessen          #+#    #+#             */
-/*   Updated: 2024/01/11 15:30:38 by dmaessen         ###   ########.fr       */
+/*   Updated: 2024/01/15 15:54:53 by domi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ typedef struct s_map
 	double	posY;
 	double dirX; // direction vector of player
 	double dirY;
+	double angleFOV;
 	double planeX; // camera plane of player
 	double planeY;
 	double time; // to calculate time between frames
@@ -100,7 +101,7 @@ typedef struct s_map
     int hit; //was there a wall hit?
     int side; //was a NS or a EW wall hit?
 	int lineHeight; // to know the line hieght to draw on screen
-	int picth;
+	int pitch;
 	int drawStart;
 	int drawEnd;
 	int pitch;
@@ -110,8 +111,15 @@ typedef struct s_map
 	int textureY;
 	double step;
 	double texturePos;
-	uint32_t color;
+	uint32_t color; // needed??
+	mlx_image_t	*img;
+	
 }t_map;
+
+typedef struct t_wall
+{
+	mlx_texture_t *tex;
+} t_wall;
 
 /**
  * Main struct with all the information that is needed to run
@@ -123,7 +131,8 @@ typedef struct s_data
 	t_colors		*colors;
 	t_data_input	*input;
 	t_map			*m;
-
+	t_wall			*wall;
+	mlx_image_t *img;
 }t_data;
 
 

@@ -6,7 +6,7 @@
 /*   By: domi <domi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 10:41:44 by dmaessen          #+#    #+#             */
-/*   Updated: 2024/01/12 11:31:15 by domi             ###   ########.fr       */
+/*   Updated: 2024/01/15 15:41:40 by domi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int main(int argc, char **argv)
 		if (map_validation(data, argv[1], 0) == 0) // have something for the error, no??
 		{
 			printf("valid map\n"); // to rm
-			mlx = mlx_init(WIDTH, HEIGHT, "cub3D", true); // or do we want to make resize false??
+			mlx = mlx_init(WIDTH, HEIGHT, "cub3D", false); // or do we want to make resize true??
 			if (!mlx)
 				return (err_msg("init mlx\n"), 1);
 			raycaster_start(data, mlx); 
