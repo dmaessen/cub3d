@@ -6,7 +6,7 @@
 /*   By: domi <domi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 10:41:44 by dmaessen          #+#    #+#             */
-/*   Updated: 2024/01/15 15:41:40 by domi             ###   ########.fr       */
+/*   Updated: 2024/01/16 10:00:35 by domi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,9 @@ int main(int argc, char **argv)
 			mlx = mlx_init(WIDTH, HEIGHT, "cub3D", false); // or do we want to make resize true??
 			if (!mlx)
 				return (err_msg("init mlx\n"), 1);
-			raycaster_start(data, mlx); 
+			init_map(data, mlx);
+			mlx_image_to_window(mlx, data->img, 0, 0);
+			mlx_loop_hook(mlx, &start, data); 
 			//mlx_loop_hook(mlx, &move, data); // look into these hooks
 			mlx_loop(mlx);
 			mlx_terminate(mlx); // needed??

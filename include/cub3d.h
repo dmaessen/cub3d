@@ -6,7 +6,7 @@
 /*   By: domi <domi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 10:43:40 by dmaessen          #+#    #+#             */
-/*   Updated: 2024/01/15 15:54:53 by domi             ###   ########.fr       */
+/*   Updated: 2024/01/16 11:23:04 by domi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ typedef struct s_map
 	double dirX; // direction vector of player
 	double dirY;
 	double angleFOV;
+	double dirLen;
 	double planeX; // camera plane of player
 	double planeY;
 	double time; // to calculate time between frames
@@ -98,13 +99,13 @@ typedef struct s_map
     double perpWallDist;      
     int stepX; //what direction to step in x or y-direction (either +1 or -1)
     int stepY;
-    int hit; //was there a wall hit?
+    int hitwall; //was there a wall hit?
     int side; //was a NS or a EW wall hit?
 	int lineHeight; // to know the line hieght to draw on screen
 	int pitch;
 	int drawStart;
 	int drawEnd;
-	int pitch;
+	//int pitch;
 	int addTexture;
 	double wallX; // where the wall was hit
 	int textureX; // x-y corrdinate on texture
@@ -241,8 +242,10 @@ void	check_doubles(t_textures *t);
 
 
 /* RAYCASTING */
-int raycaster_start(t_data *data, mlx_t *mlx);
+void start(void *param);
 void pos_player(t_data *data);
+void dir_player(t_data *data);
+void init_map(t_data *data, mlx_t *mlx);
 //void load_textures(t_data *data, mlx_t *mlx);
 void move(mlx_key_data_t keydata, void *param);
 void move_up(t_data *data);
@@ -251,5 +254,7 @@ void move_left(t_data *data);
 void move_right(t_data *data);
 void look_left(t_data *data);
 void look_right(t_data *data);
+mlx_texture_t *which_wall(t_data *data);
+unsigned int get_pixel(mlx_texture_t *t, uint32_t x, uint32_t y);
 
 #endif
