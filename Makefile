@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: domi <domi@student.42.fr>                  +#+  +:+       +#+         #
+#    By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/31 10:43:27 by dmaessen          #+#    #+#              #
-#    Updated: 2024/01/16 11:24:27 by domi             ###   ########.fr        #
+#    Updated: 2024/01/17 11:32:49 by dmaessen         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ LIBFT = libft/libft.a
 HEADERS = -I ./include -I MLX42/include -I libft/
 
 #LIB = MLX42/build/libmlx42.a -lglfw -framework Cocoa -framework OpenGL -framework IOKit $(LIBFT)
-LIB = MLX42/build/libmlx42.a -ldl -lglfw3 -pthread -lm $(LIBFT)
+LIB = MLX42/build/libmlx42.a -ldl -lglfw -pthread -lm $(LIBFT)
 
 SRC =  src/main.c \
 	src/parsing/parse_input.c src/parsing/parse_map.c src/parsing/parse_spaces.c src/parsing/parse_checks.c \

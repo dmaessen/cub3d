@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 10:41:41 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/11/06 15:43:15 by dmaessen         ###   ########.fr       */
+/*   Updated: 2024/01/17 11:54:01 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,4 +73,26 @@ char	*rm_spaces(char *line)
 	}
 	newline[j] = '\0';
 	return (newline);
+}
+
+char	*ft_strdup_check(const char *s1)
+{
+	int		i;
+	int		size;
+	char	*ptr;
+
+	size = ft_strlen(s1);
+	ptr = (char *)malloc((size + 1) * sizeof(char));
+	if (ptr == NULL)
+		return (NULL);
+	i = 0;
+	while (s1[i])
+	{
+		if (s1[i] == '\n')
+			break;
+		ptr[i] = s1[i];
+		i++;
+	}
+	ptr[i] = '\0';
+	return (ptr);
 }

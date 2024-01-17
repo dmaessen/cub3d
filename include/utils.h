@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 10:43:43 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/11/06 15:17:04 by dmaessen         ###   ########.fr       */
+/*   Updated: 2024/01/17 11:53:01 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,5 +58,8 @@ void	*calloc_exit(size_t count, size_t size);
  * @param line line read from the input file
  */
 char	*rm_spaces(char *line);
+
+
+char	*ft_strdup_check(const char *s1);
 
 #endif

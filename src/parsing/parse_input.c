@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 10:41:23 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/11/06 16:00:14 by dmaessen         ###   ########.fr       */
+/*   Updated: 2024/01/17 11:52:37 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,22 +74,22 @@ void	add_data(t_data *data, char **str, int i)
 {
 	if (ft_strncmp(str[i], "NO", 2) == 0 && str[i + 1])
 	{
-		data->textures->no_texture = ft_strdup(str[i + 1]);
+		data->textures->no_texture = ft_strdup_check(str[i + 1]);
 		check_image(data->textures->no_texture);
 	}
 	if (ft_strncmp(str[i], "SO", 2) == 0 && str[i + 1])
 	{
-		data->textures->so_texture = ft_strdup(str[i + 1]);
+		data->textures->so_texture = ft_strdup_check(str[i + 1]);
 		check_image(data->textures->so_texture);
 	}
 	if (ft_strncmp(str[i], "WE", 2) == 0 && str[i + 1])
 	{
-		data->textures->we_texture = ft_strdup(str[i + 1]);
+		data->textures->we_texture = ft_strdup_check(str[i + 1]);
 		check_image(data->textures->we_texture);
 	}
 	if (ft_strncmp(str[i], "EA", 2) == 0 && str[i + 1])
 	{
-		data->textures->ea_texture = ft_strdup(str[i + 1]);
+		data->textures->ea_texture = ft_strdup_check(str[i + 1]);
 		check_image(data->textures->ea_texture);
 	}
 	if (!data->textures->no_texture || !data->textures->so_texture

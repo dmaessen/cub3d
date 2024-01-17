@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: domi <domi@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 10:43:40 by dmaessen          #+#    #+#             */
-/*   Updated: 2024/01/16 11:23:04 by domi             ###   ########.fr       */
+/*   Updated: 2024/01/17 13:29:36 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,8 +85,8 @@ typedef struct s_map
 	double dirLen;
 	double planeX; // camera plane of player
 	double planeY;
-	double time; // to calculate time between frames
-	double oldtime;
+	// double time; // to calculate time between frames
+	// double oldtime;
 	double cameraX; // x coordinate in camera space
 	double rayDirX;
 	double rayDirY;
@@ -102,11 +102,11 @@ typedef struct s_map
     int hitwall; //was there a wall hit?
     int side; //was a NS or a EW wall hit?
 	int lineHeight; // to know the line hieght to draw on screen
-	int pitch;
+	//int pitch;
 	int drawStart;
 	int drawEnd;
 	//int pitch;
-	int addTexture;
+	int addTexture; // needed??
 	double wallX; // where the wall was hit
 	int textureX; // x-y corrdinate on texture
 	int textureY;
@@ -256,5 +256,6 @@ void look_left(t_data *data);
 void look_right(t_data *data);
 mlx_texture_t *which_wall(t_data *data);
 unsigned int get_pixel(mlx_texture_t *t, uint32_t x, uint32_t y);
+void init_datamap(t_map *m);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 13:45:23 by dmaessen          #+#    #+#             */
-/*   Updated: 2024/01/11 15:43:03 by dmaessen         ###   ########.fr       */
+/*   Updated: 2024/01/17 11:36:47 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void move_up(t_data *data) // checking if walls
 {
 	double moveSpeed;
 
-	moveSpeed = 65 * 5.0; // check on these values
+	moveSpeed = 65 * 5.0; // check on these values - or 0.8
 	if (data->input->parsed_map[(int)(data->m->posX + data->m->dirX * moveSpeed)][(int)data->m->posY] == false)
 		data->m->posX += data->m->dirX * moveSpeed;
 	if (data->input->parsed_map[(int)data->m->posX][(int)(data->m->posY + data->m->dirY * moveSpeed)] == false)
@@ -70,7 +70,7 @@ void look_left(t_data *data) // camera direction and camera plane must be rotate
 	double oldDirX;
 	double oldPlaneX;
 
-	rotSpeed = 65 * 3.0; // check on these values
+	rotSpeed = 65 * 3.0; // check on these values -- or 0.3
 	oldDirX = data->m->dirX;
 	data->m->dirX = data->m->dirX * cos(rotSpeed) - data->m->dirY * sin(rotSpeed);
 	data->m->dirY = oldDirX * sin(rotSpeed) + data->m->dirY * cos(rotSpeed);

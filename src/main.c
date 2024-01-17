@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: domi <domi@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 10:41:44 by dmaessen          #+#    #+#             */
-/*   Updated: 2024/01/16 10:00:35 by domi             ###   ########.fr       */
+/*   Updated: 2024/01/17 11:55:25 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int main(int argc, char **argv)
 			mlx_terminate(mlx); // needed??
 		}
 	}
-	// delete textures as well
+	// delete textures as well and clean map/buffer??
 	free_struct(data);
 	free(data);
 	return (0);
