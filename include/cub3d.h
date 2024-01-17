@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 10:43:40 by dmaessen          #+#    #+#             */
-/*   Updated: 2024/01/17 13:29:36 by dmaessen         ###   ########.fr       */
+/*   Updated: 2024/01/17 14:55:37 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -256,6 +256,6 @@ void look_left(t_data *data);
 void look_right(t_data *data);
 mlx_texture_t *which_wall(t_data *data);
 unsigned int get_pixel(mlx_texture_t *t, uint32_t x, uint32_t y);
-void init_datamap(t_map *m);
+//void init_datamap(t_map *m); // needed??
 
 #endif
