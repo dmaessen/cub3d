@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 10:43:40 by dmaessen          #+#    #+#             */
-/*   Updated: 2024/01/17 14:55:37 by dmaessen         ###   ########.fr       */
+/*   Updated: 2024/01/18 15:25:45 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@
 # include "../MLX42/include/MLX42/MLX42.h"
 # include "../MLX42/include/MLX42/MLX42_Input.h"
 
-#define WIDTH 1024
-#define HEIGHT 1024
+#define WIDTH 1920
+#define HEIGHT 1080
 
-#define texWidth 64
-#define texHeight 64
+#define TEXWIDTH 64
+#define TEXHEIGHT 64
 
 typedef enum s_PLAYER_FACING
 {
@@ -77,6 +77,7 @@ typedef struct s_data_input
  */
 typedef struct s_map
 {
+	int x; // for the main while loop, going through the map
 	double	posX; // position vector of player
 	double	posY;
 	double dirX; // direction vector of player
@@ -106,7 +107,7 @@ typedef struct s_map
 	int drawStart;
 	int drawEnd;
 	//int pitch;
-	int addTexture; // needed??
+	//int addTexture; // needed??
 	double wallX; // where the wall was hit
 	int textureX; // x-y corrdinate on texture
 	int textureY;
@@ -133,7 +134,9 @@ typedef struct s_data
 	t_data_input	*input;
 	t_map			*m;
 	t_wall			*wall;
-	mlx_image_t *img;
+	mlx_t			*mlx;
+	mlx_image_t		*img;
+	mlx_image_t		*img_back;
 }t_data;
 
 
@@ -243,19 +246,29 @@ void	check_doubles(t_textures *t);
 
 /* RAYCASTING */
 void start(void *param);
+void ray_pos(t_data *data, int x);
+void inital_sidedist(t_data *data);
+void dda(t_data *data);
+
+void init_map(t_data *data, mlx_t *mlx);
 void pos_player(t_data *data);
 void dir_player(t_data *data);
-void init_map(t_data *data, mlx_t *mlx);
-//void load_textures(t_data *data, mlx_t *mlx);
-void move(mlx_key_data_t keydata, void *param);
+
+void move(void *param);
 void move_up(t_data *data);
 void move_down(t_data *data);
 void move_left(t_data *data);
 void move_right(t_data *data);
 void look_left(t_data *data);
 void look_right(t_data *data);
+
+void calc_drawing(t_data *data);
+void drawing(t_data *data);
 mlx_texture_t *which_wall(t_data *data);
 unsigned int get_pixel(mlx_texture_t *t, uint32_t x, uint32_t y);
-//void init_datamap(t_map *m); // needed??
+void clear_img(t_data *data);
+
+void background_img(t_data *data);
+int32_t ft_pixel(int32_t r, int32_t g, int32_t b, int32_t a);
 
 #endif
