@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 13:45:23 by dmaessen          #+#    #+#             */
-/*   Updated: 2024/01/18 15:33:39 by dmaessen         ###   ########.fr       */
+/*   Updated: 2024/01/18 16:16:57 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,18 +22,18 @@ void move_up(t_data *data) // checking if walls
 {
 	double moveSpeed;
 
-	moveSpeed = 0.51; // check on these values - or 0.8
+	moveSpeed = 0.55; // check on these values - or 0.8
 	if (data->input->parsed_map[(int)(data->m->posX + data->m->dirX * moveSpeed)][(int)data->m->posY] == '0')
 		data->m->posX += data->m->dirX * moveSpeed;
 	if (data->input->parsed_map[(int)data->m->posX][(int)(data->m->posY + data->m->dirY * moveSpeed)] == '0')
 		data->m->posY += data->m->dirY * moveSpeed; 
 }
 
-void move_down(t_data *data) // check if walls around
+void move_down(t_data *data)
 {
 	double moveSpeed;
 
-	moveSpeed = 0.8; // check on these values
+	moveSpeed = 0.55;
 	if (data->input->parsed_map[(int)(data->m->posX - data->m->dirX * moveSpeed)][(int)data->m->posY] == '0')
 		data->m->posX -= data->m->dirX * moveSpeed;
 	if (data->input->parsed_map[(int)data->m->posX][(int)(data->m->posY - data->m->dirY * moveSpeed)] == '0')
@@ -46,7 +46,7 @@ void move_left(t_data *data)
 {
 	double moveSpeed;
 
-	moveSpeed = 0.51; // check on these values
+	moveSpeed = 0.55;
 	if (data->input->parsed_map[(int)(data->m->posX + data->m->planeX * moveSpeed)][(int)data->m->posY] == '0')
 		data->m->posX += data->m->planeX * moveSpeed;
 	if (data->input->parsed_map[(int)data->m->posX][(int)(data->m->posY + data->m->planeY * moveSpeed)] == '0')
@@ -57,7 +57,7 @@ void move_right(t_data *data)
 {
 	double moveSpeed;
 
-	moveSpeed = 0.51;
+	moveSpeed = 0.55;
 	if (data->input->parsed_map[(int)(data->m->posX - data->m->planeX * moveSpeed)][(int)data->m->posY] == '0')
 		data->m->posX -= data->m->planeX * moveSpeed;
 	if (data->input->parsed_map[(int)data->m->posX][(int)(data->m->posY - data->m->planeY * moveSpeed)] == '0')
@@ -85,7 +85,7 @@ void look_right(t_data *data)
 	double oldDirX;
 	double oldPlaneX;
 
-	rotSpeed = 0.1; // check on these values
+	rotSpeed = 0.1;
 	oldDirX = data->m->dirX;
 	oldPlaneX = data->m->planeX;
 	data->m->dirX = data->m->dirX * cos(-rotSpeed) - data->m->dirY * sin(-rotSpeed);
@@ -94,7 +94,7 @@ void look_right(t_data *data)
 	data->m->planeY = oldPlaneX * sin(-rotSpeed) + data->m->planeY * cos (-rotSpeed);
 }
 
-void move(void *param) // maybe these moves need to be made via img->instances[0].x += 5; and same for y
+void move(void *param)
 {
 	t_data *data;
 
