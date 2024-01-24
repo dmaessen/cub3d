@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 13:45:23 by dmaessen          #+#    #+#             */
-/*   Updated: 2024/01/23 16:45:41 by dmaessen         ###   ########.fr       */
+/*   Updated: 2024/01/24 13:50:22 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void move_down(t_data *data)
 }
 
 // These have to be made the same way as the up and down keys, 
-// but use plane_x and plane_y instead of dir_x and dir_y.
+// but use planeX and planeY instead of dirX and dirY.
 void move_left(t_data *data)
 {
 	double moveSpeed;
@@ -67,31 +67,31 @@ void move_right(t_data *data)
 void look_left(t_data *data) // camera direction and camera plane must be rotated
 {
 	double rotSpeed;
-	double olddir_x;
-	double oldplane_x;
+	double oldDirX;
+	double oldPlaneX;
 
 	rotSpeed = 0.1; // check on these values -- or 0.3
-	olddir_x = data->m->dir_x;
+	oldDirX = data->m->dir_x;
 	data->m->dir_x = data->m->dir_x * cos(rotSpeed) - data->m->dir_y * sin(rotSpeed);
-	data->m->dir_y = olddir_x * sin(rotSpeed) + data->m->dir_y * cos(rotSpeed);
-	oldplane_x = data->m->plane_x;
+	data->m->dir_y = oldDirX * sin(rotSpeed) + data->m->dir_y * cos(rotSpeed);
+	oldPlaneX = data->m->plane_x;
 	data->m->plane_x = data->m->plane_x * cos(rotSpeed) - data->m->plane_y * sin(rotSpeed);
-	data->m->plane_y = oldplane_x * sin(rotSpeed) + data->m->plane_y * cos(rotSpeed);
+	data->m->plane_y = oldPlaneX * sin(rotSpeed) + data->m->plane_y * cos(rotSpeed);
 }
 
 void look_right(t_data *data)
 {
 	double rotSpeed;
-	double olddir_x;
-	double oldplane_x;
+	double oldDirX;
+	double oldPlaneX;
 
 	rotSpeed = 0.1;
-	olddir_x = data->m->dir_x;
-	oldplane_x = data->m->plane_x;
+	oldDirX = data->m->dir_x;
+	oldPlaneX = data->m->plane_x;
 	data->m->dir_x = data->m->dir_x * cos(-rotSpeed) - data->m->dir_y * sin(-rotSpeed);
-	data->m->dir_y = olddir_x * sin(-rotSpeed) + data->m->dir_y * cos(-rotSpeed);
+	data->m->dir_y = oldDirX * sin(-rotSpeed) + data->m->dir_y * cos(-rotSpeed);
 	data->m->plane_x = data->m->plane_x * cos(-rotSpeed) - data->m->plane_y * sin(-rotSpeed);
-	data->m->plane_y = oldplane_x * sin(-rotSpeed) + data->m->plane_y * cos (-rotSpeed);
+	data->m->plane_y = oldPlaneX * sin(-rotSpeed) + data->m->plane_y * cos (-rotSpeed);
 }
 
 void move(void *param)

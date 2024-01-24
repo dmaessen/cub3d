@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 13:53:16 by dmaessen          #+#    #+#             */
-/*   Updated: 2024/01/24 13:14:05 by dmaessen         ###   ########.fr       */
+/*   Updated: 2024/01/24 13:46:22 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,11 @@
 
 static void init_datamap(t_data *data)
 {
-    data->m->cameraX = 0.0;
-    data->m->ray_dirX = 0.0;
-    data->m->rayDirY = 0.0;
-    data->m->mapX = 0;
-    data->m->mapY = 0;
+    data->m->camera_x = 0.0;
+    data->m->ray_dir_x = 0.0;
+    data->m->ray_dir_y = 0.0;
+    data->m->map_x = 0;
+    data->m->map_y = 0;
     data->m->side_dist_x = 0.0;
     data->m->side_dist_y = 0.0;
     data->m->delta_dist_x = 0.0;
@@ -48,10 +48,10 @@ void init_map(t_data *data, mlx_t *mlx)
     data->m = calloc_exit(1, sizeof(t_map)); // needed -- also free later then
     pos_player(data); // fills in posY and posX
     dir_player(data);
-    data->m->angleFOV = 0.66; // which results in a 66degre angle for the Field of Vision
-    data->m->dirLen = sqrt(data->m->dirX * data->m->dirX + data->m->dirY * data->m->dirY);
-    data->m->planeX = data->m->dirY / data->m->dirLen * data->m->angleFOV;
-    data->m->planeY = -data->m->dirX / data->m->dirLen * data->m->angleFOV; 
+    data->m->angle_fov = 0.66; // which results in a 66degre angle for the Field of Vision
+    data->m->dir_len = sqrt(data->m->dir_x * data->m->dir_x + data->m->dir_y * data->m->dir_y);
+    data->m->plane_x = data->m->dir_y / data->m->dir_len * data->m->angle_fov;
+    data->m->plane_y = -data->m->dir_x / data->m->dir_len * data->m->angle_fov; 
     data->wall = malloc(4 * sizeof(t_wall));
     if (!data->wall)
         return err_msg("malloc failed");
@@ -87,13 +87,13 @@ void pos_player(t_data *data)
             || data->input->parsed_map[i][col] == 'E'
             || data->input->parsed_map[i][col] == 'W')
             {
-                data->m->posY = (double)col + 0.5; // check on it later
-                data->m->posX = (double)i + 0.5;
+                data->m->pos_y = (double)col + 0.5; // check on it later
+                data->m->pos_x = (double)i + 0.5;
                 break;
             }
             col++;
         }
-        if (data->m->posX != 0)
+        if (data->m->pos_x != 0)
             break;
         i++;
     }
@@ -103,22 +103,22 @@ void dir_player(t_data *data)
 {
     if (data->input->player_facing == P_NORTH)
     {
-        data->m->dirX = 0;
-        data->m->dirY = 1;
+        data->m->dir_x = 0;
+        data->m->dir_y = 1;
     }
     if (data->input->player_facing == P_SOUTH)
     {
-        data->m->dirX = 0;
-        data->m->dirY = -1;
+        data->m->dir_x = 0;
+        data->m->dir_y = -1;
     }
     if (data->input->player_facing == P_EAST)
     {
-        data->m->dirX = -1;
-        data->m->dirY = 0;
+        data->m->dir_x = -1;
+        data->m->dir_y = 0;
     }
     if (data->input->player_facing == P_WEST)
     {
-        data->m->dirX = 1;
-        data->m->dirY = 0;
+        data->m->dir_x = 1;
+        data->m->dir_y = 0;
     }
 }
