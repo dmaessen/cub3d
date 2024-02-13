@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 10:43:40 by dmaessen          #+#    #+#             */
-/*   Updated: 2024/01/24 13:25:52 by dmaessen         ###   ########.fr       */
+/*   Updated: 2024/02/13 15:23:19 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,8 +86,6 @@ typedef struct s_map
 	double dir_len;
 	double plane_x; // camera plane of player
 	double plane_y;
-	// double time; // to calculate time between frames
-	// double oldtime;
 	double camera_x; // x coordinate in camera space
 	double ray_dir_x;
 	double ray_dir_y;
@@ -103,17 +101,14 @@ typedef struct s_map
     int hitwall; //was there a wall hit?
     int side; //was a NS or a EW wall hit?
 	int line_height; // to know the line hieght to draw on screen
-	//int pitch;
 	int draw_start;
 	int draw_end;
-	//int pitch;
-	//int addTexture; // needed??
 	double wall_x; // where the wall was hit
 	int texture_x; // x-y corrdinate on texture
 	int texture_y;
 	double step;
 	double texture_pos;
-	uint32_t color; // needed??
+	uint32_t color;
 	mlx_image_t	*img;
 
 }t_map;
@@ -266,7 +261,6 @@ void calc_drawing(t_data *data);
 void drawing(t_data *data);
 mlx_texture_t *which_wall(t_data *data);
 unsigned int get_pixel(mlx_texture_t *t, uint32_t x, uint32_t y);
-void clear_img(t_data *data);
 
 void background_img(t_data *data);
 int32_t ft_pixel(int32_t r, int32_t g, int32_t b, int32_t a);
