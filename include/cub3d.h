@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ahornstr <ahornstr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 10:43:40 by dmaessen          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2024/02/13 15:23:19 by dmaessen         ###   ########.fr       */
+=======
+/*   Updated: 2024/02/13 15:03:49 by ahornstr         ###   ########.fr       */
+>>>>>>> f02f867 (fixed parser excl norminette)
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,6 +136,7 @@ typedef struct s_data
 	mlx_t			*mlx;
 	mlx_image_t		*img;
 	mlx_image_t		*img_back;
+	int				texture_count;
 }t_data;
 
 

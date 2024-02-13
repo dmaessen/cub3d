@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   move.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ahornstr <ahornstr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 13:45:23 by dmaessen          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2024/02/14 17:06:59 by dmaessen         ###   ########.fr       */
+=======
+/*   Updated: 2024/02/13 15:40:32 by ahornstr         ###   ########.fr       */
+>>>>>>> f02f867 (fixed parser excl norminette)
 /*                                                                            */
 /* ************************************************************************** */
 

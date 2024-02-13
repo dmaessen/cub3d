@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_checks.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ahornstr <ahornstr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 15:26:02 by dmaessen          #+#    #+#             */
-/*   Updated: 2023/11/06 15:53:23 by dmaessen         ###   ########.fr       */
+/*   Updated: 2024/01/29 16:22:50 by ahornstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,12 @@ int	format_validation(char *file)
 {
 	char	*res;
 
-	if (ft_strlen(file) < 4)
+	if (ft_strlen(file) < 4) // check .cub
 		return (1);
-	res = ft_substr(file, ft_strlen(file) - 4, 4);
+	res = ft_substr(file, ft_strlen(file) - 4, 4); // .cub extension
 	if (!res)
 		err_msg("Malloc failed.\n");
-	if (ft_strcmp(res, ".cub") != 0)
+	if (ft_strcmp(res, ".cub") != 0) // check .cub
 		return (free(res), 1);
 	free(res);
 	return (0);
