@@ -6,7 +6,7 @@
 /*   By: ahornstr <ahornstr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 13:53:16 by dmaessen          #+#    #+#             */
-/*   Updated: 2024/02/14 18:26:22 by ahornstr         ###   ########.fr       */
+/*   Updated: 2024/02/14 18:31:54 by ahornstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void init_map(t_data *data, mlx_t *mlx)
     pos_player(data); // fills in posY and posX
     dir_player(data);
     data->m->angle_fov = 0.66; // which results in a 66degre angle for the Field of Vision
-    data->m->dir_len = sqrt(data->m->dir_x * data->m->dir_x + data->m->dir_y * data->m->dir_y);
+    data->m->dir_len = sqrt((data->m->dir_x * data->m->dir_x) + (data->m->dir_y * data->m->dir_y));
     data->m->plane_x = data->m->dir_y / data->m->dir_len * data->m->angle_fov;
     data->m->plane_y = -data->m->dir_x / data->m->dir_len * data->m->angle_fov; 
     data->wall = malloc(4 * sizeof(t_wall));

@@ -6,7 +6,7 @@
 /*   By: ahornstr <ahornstr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 13:45:23 by dmaessen          #+#    #+#             */
-/*   Updated: 2024/02/14 18:26:14 by ahornstr         ###   ########.fr       */
+/*   Updated: 2024/02/14 18:31:37 by ahornstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void look_left(t_data *data) // camera direction and camera plane must be rotate
 	double oldDirX;
 	double oldPlaneX;
 
-	rotSpeed = 0.1; // check on these values -- or 0.3
+	rotSpeed = 0.05; // check on these values -- or 0.3
 	oldDirX = data->m->dir_x;
 	data->m->dir_x = data->m->dir_x * cos(rotSpeed) - data->m->dir_y * sin(rotSpeed);
 	data->m->dir_y = oldDirX * sin(rotSpeed) + data->m->dir_y * cos(rotSpeed);
@@ -74,7 +74,7 @@ void	look_right(t_data *data)
 	double	old_dir_x;
 	double	old_plane_x;
 
-	rotSpeed = 0.1;
+	rotSpeed = 0.05;
 	oldDirX = data->m->dir_x;
 	oldPlaneX = data->m->plane_x;
 	data->m->dir_x = data->m->dir_x * cos(-rotSpeed) - data->m->dir_y * sin(-rotSpeed);
