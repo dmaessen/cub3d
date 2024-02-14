@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ahornstr <ahornstr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 10:41:28 by dmaessen          #+#    #+#             */
-/*   Updated: 2024/01/08 13:14:07 by dmaessen         ###   ########.fr       */
+/*   Updated: 2024/02/14 17:41:25 by ahornstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ static void	save_line(t_data *data, char *line, int row)
 		i++;
 	}
 	data->input->parsed_map[row][i] = '\0';
-	printf("%s", data->input->parsed_map[row]); // to rm
 }
+// printf("%s", data->input->parsed_map[row]);
 
 static void	check_middlemap(t_data *data, char *line, size_t j)
 {
@@ -77,8 +77,11 @@ static int	parse_map(t_data *data, char *line, int i)
 	char	*newline;
 	size_t	j;
 
+	syntax_check(data, line);
+	if (data->texture_count > 6)
+		err_msg("Too many textures");
 	newline = rm_spaces(line);
-	j = 0;
+	j = -1;
 	if (i > 6)
 	{
 		data->input->parsed_map[i - 7] = \
@@ -86,12 +89,9 @@ static int	parse_map(t_data *data, char *line, int i)
 		save_line(data, line, i - 7);
 		if (i == 7 || i == data->input->nb_lines)
 		{
-			while (newline[j])
-			{
+			while (newline[j++])
 				if (newline[j] != 49 && !newline[j])
 					err_msg("Invalid map, empty space instead of a wall\n");
-				j++;
-			}
 		}
 		else
 			check_middlemap(data, newline, j);
@@ -111,6 +111,7 @@ int	map_validation(t_data *data, char *file, int i)
 	data->input->player = false;
 	data->input->parsed_map = \
 	calloc_exit((data->input->nb_lines - 6) + 1, sizeof(char *));
+	data->texture_count = 0;
 	while (1)
 	{
 		line = get_next_line_exit(fd);
@@ -119,11 +120,11 @@ int	map_validation(t_data *data, char *file, int i)
 		if (ft_strcmp(line, "\n\0") != 0)
 			i++;
 		if (parse_map(data, line, i) == 1)
-			return (free(line), close(fd), 1); // or exit??
+			return (free(line), close(fd), 1);
 		free(line);
 	}
+	wall_check(data);
 	close(fd);
 	is_walkable_path(data);
-	parse_spaces(data);
-	return (0);
+	return (parse_spaces(data), 0);
 }

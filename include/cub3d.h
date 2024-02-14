@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ahornstr <ahornstr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 10:43:40 by dmaessen          #+#    #+#             */
-/*   Updated: 2024/02/13 15:23:19 by dmaessen         ###   ########.fr       */
+/*   Updated: 2024/02/14 18:25:52 by ahornstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,6 +132,7 @@ typedef struct s_data
 	mlx_t			*mlx;
 	mlx_image_t		*img;
 	mlx_image_t		*img_back;
+	int				texture_count;
 }t_data;
 
 
@@ -236,7 +237,8 @@ void	check_image(char *path);
  */
 void	check_doubles(t_textures *t);
 
-
+void	syntax_check(t_data *data, char *line);
+void	wall_check(t_data *data);
 
 
 /* RAYCASTING */

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ahornstr <ahornstr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 10:43:43 by dmaessen          #+#    #+#             */
-/*   Updated: 2024/01/17 11:53:01 by dmaessen         ###   ########.fr       */
+/*   Updated: 2024/02/13 14:55:36 by ahornstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,5 +61,8 @@ char	*rm_spaces(char *line);
 
 
 char	*ft_strdup_check(const char *s1);
+
+int		ft_strarrlen(char **arr);
+
 
 #endif

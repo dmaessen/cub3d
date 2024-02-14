@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ahornstr <ahornstr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 10:41:41 by dmaessen          #+#    #+#             */
-/*   Updated: 2024/01/17 11:54:01 by dmaessen         ###   ########.fr       */
+/*   Updated: 2024/02/13 14:55:15 by ahornstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,4 +95,14 @@ char	*ft_strdup_check(const char *s1)
 	}
 	ptr[i] = '\0';
 	return (ptr);
+}
+
+int	ft_strarrlen(char **arr)
+{
+	int	i;
+
+	i = 0;
+	while (arr[i])
+		i++;
+	return (i);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   move.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ahornstr <ahornstr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 13:45:23 by dmaessen          #+#    #+#             */
-/*   Updated: 2024/02/14 17:06:59 by dmaessen         ###   ########.fr       */
+/*   Updated: 2024/02/14 18:26:14 by ahornstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,21 +20,52 @@
 
 void	look_left(t_data *data)
 {
-	double	rotation;
-	double	old_dir_x;
-	double	old_plane_x;
+	double moveSpeed;
 
-	rotation = 0.1;
-	old_dir_x = data->m->dir_x;
-	data->m->dir_x = data->m->dir_x * cos(rotation) \
-	- data->m->dir_y * sin(rotation);
-	data->m->dir_y = old_dir_x * sin(rotation) \
-	+ data->m->dir_y * cos(rotation);
-	old_plane_x = data->m->plane_x;
-	data->m->plane_x = data->m->plane_x * cos(rotation) \
-	- data->m->plane_y * sin(rotation);
-	data->m->plane_y = old_plane_x * sin(rotation) \
-	+ data->m->plane_y * cos(rotation);
+	moveSpeed = 0.55;
+	if (data->input->parsed_map[(int)(data->m->pos_x - data->m->dir_x * moveSpeed)][(int)data->m->pos_y] == '0')
+		data->m->pos_x -= data->m->dir_x * moveSpeed;
+	if (data->input->parsed_map[(int)data->m->pos_x][(int)(data->m->pos_y - data->m->dir_y * moveSpeed)] == '0')
+		data->m->pos_y -= data->m->dir_y * moveSpeed;
+}
+
+// These have to be made the same way as the up and down keys, 
+// but use planeX and planeY instead of dirX and dirY.
+void move_left(t_data *data)
+{
+	double moveSpeed;
+
+	moveSpeed = 0.55;
+	if (data->input->parsed_map[(int)(data->m->pos_x + data->m->plane_x * moveSpeed)][(int)data->m->pos_y] == '0')
+		data->m->pos_x += data->m->plane_x * moveSpeed;
+	if (data->input->parsed_map[(int)data->m->pos_x][(int)(data->m->pos_y + data->m->plane_y * moveSpeed)] == '0')
+		data->m->pos_y += data->m->plane_y * moveSpeed;
+}
+
+void move_right(t_data *data)
+{
+	double moveSpeed;
+
+	moveSpeed = 0.55;
+	if (data->input->parsed_map[(int)(data->m->pos_x - data->m->plane_x * moveSpeed)][(int)data->m->pos_y] == '0')
+		data->m->pos_x -= data->m->plane_x * moveSpeed;
+	if (data->input->parsed_map[(int)data->m->pos_x][(int)(data->m->pos_y - data->m->plane_y * moveSpeed)] == '0')
+		data->m->pos_y -= data->m->plane_y * moveSpeed;
+}
+
+void look_left(t_data *data) // camera direction and camera plane must be rotated
+{
+	double rotSpeed;
+	double oldDirX;
+	double oldPlaneX;
+
+	rotSpeed = 0.1; // check on these values -- or 0.3
+	oldDirX = data->m->dir_x;
+	data->m->dir_x = data->m->dir_x * cos(rotSpeed) - data->m->dir_y * sin(rotSpeed);
+	data->m->dir_y = oldDirX * sin(rotSpeed) + data->m->dir_y * cos(rotSpeed);
+	oldPlaneX = data->m->plane_x;
+	data->m->plane_x = data->m->plane_x * cos(rotSpeed) - data->m->plane_y * sin(rotSpeed);
+	data->m->plane_y = oldPlaneX * sin(rotSpeed) + data->m->plane_y * cos(rotSpeed);
 }
 
 void	look_right(t_data *data)
@@ -43,17 +74,13 @@ void	look_right(t_data *data)
 	double	old_dir_x;
 	double	old_plane_x;
 
-	rotation = 0.1;
-	old_dir_x = data->m->dir_x;
-	old_plane_x = data->m->plane_x;
-	data->m->dir_x = data->m->dir_x * cos(-rotation) \
-	- data->m->dir_y * sin(-rotation);
-	data->m->dir_y = old_dir_x * sin(-rotation) \
-	+ data->m->dir_y * cos(-rotation);
-	data->m->plane_x = data->m->plane_x * cos(-rotation) \
-	- data->m->plane_y * sin(-rotation);
-	data->m->plane_y = old_plane_x * sin(-rotation) \
-	+ data->m->plane_y * cos (-rotation);
+	rotSpeed = 0.1;
+	oldDirX = data->m->dir_x;
+	oldPlaneX = data->m->plane_x;
+	data->m->dir_x = data->m->dir_x * cos(-rotSpeed) - data->m->dir_y * sin(-rotSpeed);
+	data->m->dir_y = oldDirX * sin(-rotSpeed) + data->m->dir_y * cos(-rotSpeed);
+	data->m->plane_x = data->m->plane_x * cos(-rotSpeed) - data->m->plane_y * sin(-rotSpeed);
+	data->m->plane_y = oldPlaneX * sin(-rotSpeed) + data->m->plane_y * cos (-rotSpeed);
 }
 
 void	move(void *param)
