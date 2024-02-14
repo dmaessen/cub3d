@@ -6,7 +6,7 @@
 /*   By: ahornstr <ahornstr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 15:26:02 by dmaessen          #+#    #+#             */
-/*   Updated: 2024/01/29 16:22:50 by ahornstr         ###   ########.fr       */
+/*   Updated: 2024/02/14 17:24:34 by ahornstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,18 +17,18 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+// checking .cub extension
 int	format_validation(char *file)
 {
 	char	*res;
 
-	if (ft_strlen(file) < 4) // check .cub
+	if (ft_strlen(file) < 4)
 		return (1);
-	res = ft_substr(file, ft_strlen(file) - 4, 4); // .cub extension
+	res = ft_substr(file, ft_strlen(file) - 4, 4);
 	if (!res)
 		err_msg("Malloc failed.\n");
-	if (ft_strcmp(res, ".cub") != 0) // check .cub
-		return (free(res), 1);
-	free(res);
+	if (ft_strcmp(res, ".cub") != 0)
+		free(res);
 	return (0);
 }
 

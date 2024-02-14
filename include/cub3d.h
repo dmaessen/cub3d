@@ -6,11 +6,7 @@
 /*   By: ahornstr <ahornstr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 10:43:40 by dmaessen          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2024/02/13 15:23:19 by dmaessen         ###   ########.fr       */
-=======
-/*   Updated: 2024/02/13 15:03:49 by ahornstr         ###   ########.fr       */
->>>>>>> f02f867 (fixed parser excl norminette)
+/*   Updated: 2024/02/14 18:25:52 by ahornstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -241,7 +237,8 @@ void	check_image(char *path);
  */
 void	check_doubles(t_textures *t);
 
-
+void	syntax_check(t_data *data, char *line);
+void	wall_check(t_data *data);
 
 
 /* RAYCASTING */
