@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_input.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ahornstr <ahornstr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 10:41:23 by dmaessen          #+#    #+#             */
-/*   Updated: 2024/01/17 11:52:37 by dmaessen         ###   ########.fr       */
+/*   Updated: 2024/02/14 17:24:56 by ahornstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,7 +143,7 @@ int	input_validation(t_data *data, char *file)
 		if (ft_strcmp(line, "\n\0") != 0)
 			data->input->nb_lines++;
 		if (parse_line(data, line) == 1)
-			return (free(line), close(fd), 1); // or exit??
+			return (free(line), close(fd), 1);
 		free(line);
 	}
 	close(fd);
