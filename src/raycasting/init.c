@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 13:53:16 by dmaessen          #+#    #+#             */
-/*   Updated: 2024/02/13 15:18:52 by dmaessen         ###   ########.fr       */
+/*   Updated: 2024/02/14 17:14:23 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,19 +41,10 @@ static void	init_datamap(t_data *data)
 	data->m->texture_y = 0;
 	data->m->step = 0;
 	data->m->texture_pos = 0.0;
-	data->m->angle_fov = 0.66;
 }
 
-/* 66degre angle for the Field of Vision, to correct fish-eye */
-void	init_map(t_data *data, mlx_t *mlx)
+static void	load_textures(t_data *data)
 {
-	data->m = calloc_exit(1, sizeof(t_map)); // free later
-	pos_player(data);
-	dir_player(data);
-	data->m->dir_len = sqrt(data->m->dir_x * data->m->dir_x \
-	+ data->m->dir_y * data->m->dir_y);
-	data->m->plane_x = data->m->dir_y / data->m->dir_len * data->m->angle_fov;
-	data->m->plane_y = -data->m->dir_x / data->m->dir_len * data->m->angle_fov;
 	data->wall = malloc(4 * sizeof(t_wall));
 	if (!data->wall)
 		return (err_msg("malloc failed"));
@@ -62,12 +53,31 @@ void	init_map(t_data *data, mlx_t *mlx)
 	data->wall[2].tex = NULL;
 	data->wall[3].tex = NULL;
 	data->wall[0].tex = mlx_load_png(data->textures->no_texture);
-	data->wall[1].tex = mlx_load_png(data->textures->so_texture);
-	data->wall[2].tex = mlx_load_png(data->textures->we_texture);
-	data->wall[3].tex = mlx_load_png(data->textures->ea_texture);
-	if (!data->wall[0].tex || !data->wall[1].tex
-		|| !data->wall[2].tex || !data->wall[3].tex)
+	if (!data->wall[0].tex)
 		return (err_msg("loading textures\n"));
+	data->wall[1].tex = mlx_load_png(data->textures->so_texture);
+	if (!data->wall[1].tex)
+		return (err_msg("loading textures\n"));
+	data->wall[2].tex = mlx_load_png(data->textures->we_texture);
+	if (!data->wall[2].tex)
+		return (err_msg("loading textures\n"));
+	data->wall[3].tex = mlx_load_png(data->textures->ea_texture);
+	if (!data->wall[3].tex)
+		return (err_msg("loading textures\n"));
+}
+
+/* 66degre angle for the Field of Vision, to correct fish-eye */
+void	init_map(t_data *data, mlx_t *mlx)
+{
+	data->m = calloc_exit(1, sizeof(t_map));
+	pos_player(data);
+	dir_player(data);
+	data->m->dir_len = sqrt(data->m->dir_x * data->m->dir_x \
+	+ data->m->dir_y * data->m->dir_y);
+	data->m->angle_fov = 0.66;
+	data->m->plane_x = data->m->dir_y / data->m->dir_len * data->m->angle_fov;
+	data->m->plane_y = -data->m->dir_x / data->m->dir_len * data->m->angle_fov;
+	load_textures(data);
 	data->img = mlx_new_image(mlx, WIDTH, HEIGHT);
 	if (!data->img)
 		return (err_msg("mlx_new_image failed"));

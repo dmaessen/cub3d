@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 13:15:24 by dmaessen          #+#    #+#             */
-/*   Updated: 2024/02/13 14:50:01 by dmaessen         ###   ########.fr       */
+/*   Updated: 2024/02/14 17:05:41 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	start(void *param)
     to know in which square of the map the ray is in */
 void	ray_pos(t_data *data, int x)
 {
-	data->m->camera_x = (2 * x) / ((double)WIDTH - 1);
+	data->m->camera_x = 2 * x / (double)WIDTH - 1;
 	data->m->ray_dir_x = data->m->dir_x + data->m->plane_x * data->m->camera_x;
 	data->m->ray_dir_y = data->m->dir_y + data->m->plane_y * data->m->camera_x;
 	data->m->map_x = (int)data->m->pos_x;
