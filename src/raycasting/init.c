@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahornstr <ahornstr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 13:53:16 by dmaessen          #+#    #+#             */
-/*   Updated: 2024/02/15 13:51:11 by ahornstr         ###   ########.fr       */
+/*   Updated: 2024/02/15 18:15:16 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ void	init_map(t_data *data, mlx_t *mlx)
 	dir_player(data);
 	data->m->dir_len = sqrt(data->m->dir_x * data->m->dir_x \
 	+ data->m->dir_y * data->m->dir_y);
+	//printf("%f\n", data->m->dir_len);
 	data->m->angle_fov = 0.66;
 	data->m->plane_x = data->m->dir_y / data->m->dir_len * data->m->angle_fov;
 	data->m->plane_y = -data->m->dir_x / data->m->dir_len * data->m->angle_fov;
@@ -114,24 +115,25 @@ void	pos_player(t_data *data)
 
 void	dir_player(t_data *data)
 {
+	printf("facing%d", data->input->player_facing);
 	if (data->input->player_facing == P_NORTH)
-	{
-		data->m->dir_x = 0;
-		data->m->dir_y = 1;
-	}
-	if (data->input->player_facing == P_SOUTH)
-	{
-		data->m->dir_x = 0;
-		data->m->dir_y = -1;
-	}
-	if (data->input->player_facing == P_EAST)
 	{
 		data->m->dir_x = -1;
 		data->m->dir_y = 0;
 	}
-	if (data->input->player_facing == P_WEST)
+	if (data->input->player_facing == P_SOUTH)
 	{
 		data->m->dir_x = 1;
 		data->m->dir_y = 0;
+	}
+	if (data->input->player_facing == P_EAST)
+	{
+		data->m->dir_x = -1;
+		data->m->dir_y = 1;
+	}
+	if (data->input->player_facing == P_WEST)
+	{
+		data->m->dir_x = 0;
+		data->m->dir_y = 1;
 	}
 }

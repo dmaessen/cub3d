@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahornstr <ahornstr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 14:09:00 by dmaessen          #+#    #+#             */
-/*   Updated: 2024/02/14 18:31:59 by ahornstr         ###   ########.fr       */
+/*   Updated: 2024/02/15 17:58:37 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,17 +48,17 @@ void	calc_drawing(t_data *data)
 	step: to know how much to increase the texture coordinate per screen pixel
 	texture_pos: start texture coordinate
 	texture_y: cast text coordinate to int, 
-		and mask with the last arg in case of overflow
-	*/
+	and mask with the last arg in case of overflow
+*/
 void	drawing(t_data *data)
 {
 	int	y;
 
 	data->m->texture_x = (int)(data->m->wall_x * (double)TEXWIDTH);
-	if (data->m->side == 0 && data->m->ray_dir_x > 0)
-		data->m->texture_x = TEXWIDTH - data->m->texture_x - 1;
-	if (data->m->side == 1 && data->m->ray_dir_y < 0)
-		data->m->texture_x = TEXWIDTH - data->m->texture_x - 1;
+	// if (data->m->side == 0 && data->m->ray_dir_x > 0)
+	// 	data->m->texture_x = TEXWIDTH - data->m->texture_x - 1;
+	// if (data->m->side == 1 && data->m->ray_dir_y < 0)
+	// 	data->m->texture_x = TEXWIDTH - data->m->texture_x - 1;
 	data->m->step = 1.0 * TEXHEIGHT / data->m->line_height;
 	data->m->texture_pos = (data->m->draw_start - HEIGHT / 2 \
 	+ data->m->line_height / 2) * data->m->step;

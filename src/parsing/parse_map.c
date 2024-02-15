@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahornstr <ahornstr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 10:41:28 by dmaessen          #+#    #+#             */
-/*   Updated: 2024/02/15 13:33:37 by ahornstr         ###   ########.fr       */
+/*   Updated: 2024/02/15 18:19:46 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,25 @@
 static void	startpos(t_data *data, char id)
 {
 	if (id == 'N')
+	{
+		puts("NORTH");
 		data->input->player_facing = P_NORTH;
+	}
 	if (id == 'S')
+	{
+		puts("SUD");
 		data->input->player_facing = P_SOUTH;
+	}
 	if (id == 'W')
+	{
+		puts("OUEST");
 		data->input->player_facing = P_WEST;
+	}
 	if (id == 'E')
+	{
+		puts("EST");
 		data->input->player_facing = P_EAST;
+	}
 }
 
 static void	save_line(t_data *data, char *line, int row)
@@ -47,6 +59,7 @@ static void	save_line(t_data *data, char *line, int row)
 
 static void	check_middlemap(t_data *data, char *line, size_t j)
 {
+	printf("line: %s\n", line);
 	while (line[j])
 	{
 		if (j == 0 || j == ft_strlen(line))
