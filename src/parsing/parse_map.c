@@ -6,7 +6,7 @@
 /*   By: ahornstr <ahornstr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 10:41:28 by dmaessen          #+#    #+#             */
-/*   Updated: 2024/02/15 13:33:37 by ahornstr         ###   ########.fr       */
+/*   Updated: 2024/02/15 17:20:16 by ahornstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,8 @@ static void	check_middlemap(t_data *data, char *line, size_t j)
 		}
 		else
 		{
-			if (line[j] != 'N' && line[j] != 'S' && line[j] != 'W'
-				&& line[j] != 'E' && line[j] != 48 && line[j] != 49
-				&& line[j] != '\0' && line[j] != '\n')
-				err_msg("Invalid map, unidentified character in the map\n");
+			if (!ft_strchr("NESW01\0\n ", line[j]))
+					err_msg("Invalid map, unidentified character in the map\n");
 			else if ((line[j] == 'N' || line[j] == 'S' || line[j] == 'W'
 					|| line[j] == 'E') && data->input->player == true)
 				err_msg("Invalid map, only one player allowed in the map\n");
@@ -98,8 +96,7 @@ static int	parse_map(t_data *data, char *line, int i)
 		else
 			check_middlemap(data, newline, j);
 	}
-	free(newline);
-	return (0);
+	return (free(newline), 0);
 }
 
 int	map_validation(t_data *data, char *file, int i)
@@ -125,6 +122,7 @@ int	map_validation(t_data *data, char *file, int i)
 			return (free(line), close(fd), 1);
 		free(line);
 	}
+	find_player(data->input->parsed_map);
 	wall_check(data);
 	close(fd);
 	is_walkable_path(data);

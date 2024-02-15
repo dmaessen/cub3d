@@ -6,7 +6,7 @@
 /*   By: ahornstr <ahornstr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 17:36:45 by ahornstr          #+#    #+#             */
-/*   Updated: 2024/02/14 17:44:56 by ahornstr         ###   ########.fr       */
+/*   Updated: 2024/02/15 17:23:04 by ahornstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,4 +72,24 @@ void	wall_check(t_data *data)
 		}
 		i++;
 	}
+}
+
+void	find_player(char **map)
+{
+	int	i;
+	int	j;
+	
+	i = 0;
+	while (map[i])
+	{
+		j = 0;
+		while (map[i][j])
+		{
+			if (ft_strchr("NESW", map[i][j]))
+				return;
+			j++;
+		}
+		i++;
+	}
+	err_msg("No player found");
 }
