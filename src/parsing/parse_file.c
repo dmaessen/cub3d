@@ -6,7 +6,7 @@
 /*   By: ahornstr <ahornstr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 17:36:45 by ahornstr          #+#    #+#             */
-/*   Updated: 2024/02/15 17:23:04 by ahornstr         ###   ########.fr       */
+/*   Updated: 2024/02/15 17:35:00 by ahornstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,18 +78,23 @@ void	find_player(char **map)
 {
 	int	i;
 	int	j;
+	int player;
 	
 	i = 0;
+	player = 0;
 	while (map[i])
 	{
 		j = 0;
 		while (map[i][j])
 		{
 			if (ft_strchr("NESW", map[i][j]))
-				return;
+				player++;
 			j++;
 		}
 		i++;
 	}
-	err_msg("No player found");
+	if (player > 1)
+		err_msg("Too many players");
+	if (player < 1)
+		err_msg("No player found");
 }
