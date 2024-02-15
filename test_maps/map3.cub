@@ -1,9 +1,10 @@
-N textures/a.png
-S textures/b.png  
-W textures/bluewall.png
+NO textures/a.png
+
+SO textures/b.png
+WE textures/bluewall.png
 F 192,247,176
 C 152,169,217
-E textures/d.png
+EA textures/d.png
 
 1111111111111111111111111111111111111111111111111111
         1000000000110000000000001000000000000000000000000001

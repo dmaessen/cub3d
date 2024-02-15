@@ -3,14 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   parse_spaces.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahornstr <ahornstr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/02/14 18:32:17 by ahornstr         ###   ########.fr       */
+/*   Created: 2023/10/31 10:41:28 by dmaessen          #+#    #+#             */
+/*   Updated: 2024/02/15 11:27:32 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-
 
 #include "../../libft/libft.h"
 #include "../include/cub3d.h"

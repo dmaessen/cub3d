@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahornstr <ahornstr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 10:41:41 by dmaessen          #+#    #+#             */
-/*   Updated: 2024/02/13 14:55:15 by ahornstr         ###   ########.fr       */
+/*   Updated: 2024/02/15 11:28:01 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ char	*ft_strdup_check(const char *s1)
 	while (s1[i])
 	{
 		if (s1[i] == '\n')
-			break;
+			break ;
 		ptr[i] = s1[i];
 		i++;
 	}

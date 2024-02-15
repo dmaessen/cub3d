@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 10:47:46 by dmaessen          #+#    #+#             */
-/*   Updated: 2022/10/27 10:55:22 by dmaessen         ###   ########.fr       */
+/*   Updated: 2024/02/15 11:26:21 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	*ft_strrchr(const char *s, int c)
 	{
 		if (s[len] == (char)c)
 			return (&str[len]);
-	len--;
+		len--;
 	}
 	return (0);
 }
