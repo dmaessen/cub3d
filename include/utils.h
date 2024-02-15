@@ -6,7 +6,7 @@
 /*   By: ahornstr <ahornstr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 10:43:43 by dmaessen          #+#    #+#             */
-/*   Updated: 2024/02/13 14:55:36 by ahornstr         ###   ########.fr       */
+/*   Updated: 2024/02/15 14:04:41 by ahornstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,7 @@ void	*calloc_exit(size_t count, size_t size);
  */
 char	*rm_spaces(char *line);
 
-
 char	*ft_strdup_check(const char *s1);
-
 int		ft_strarrlen(char **arr);
-
 
 #endif

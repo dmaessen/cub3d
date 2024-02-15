@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ahornstr <ahornstr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 10:41:28 by dmaessen          #+#    #+#             */
-/*   Updated: 2024/02/15 13:03:39 by dmaessen         ###   ########.fr       */
+/*   Updated: 2024/02/15 13:33:37 by ahornstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,10 @@ static void	save_line(t_data *data, char *line, int row)
 		data->input->parsed_map[row][i] = line[i];
 		i++;
 	}
-	data->input->parsed_map[row][i] = '\0';
+	if (line[0] != '\n')
+		data->input->parsed_map[row][i] = '\0';
+	else
+		err_msg("Invalid map");
 }
 
 static void	check_middlemap(t_data *data, char *line, size_t j)

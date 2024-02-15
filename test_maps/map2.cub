@@ -1,15 +1,12 @@
-NO textures/a.png
-
-SO textures/b.png  
+ NO textures/a.png
+SO textures/b.png
 WE textures/c.png
 EA textures/d.png
-
 F 255,100,0
 C 225,30,0
 
-
-111111
-100101
-10N001
-110001
-111111
+11111
+10001
+10N01
+10001
+11111

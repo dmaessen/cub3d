@@ -1,8 +1,0 @@
-- random zinnen in file
-- dubbele txt
-- write order
-
-
-raycasting	
-	data-m->wall_x +- floor
-	looking straight on spawn an not walking straight;

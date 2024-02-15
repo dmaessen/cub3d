@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   move_keys.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ahornstr <ahornstr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 14:51:57 by dmaessen          #+#    #+#             */
-/*   Updated: 2024/02/14 17:55:49 by dmaessen         ###   ########.fr       */
+/*   Updated: 2024/02/15 13:47:17 by ahornstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,10 @@ void	move_up(t_data *data)
 
 	move_speed = 0.8;
 	if (data->input->parsed_map[(int)(data->m->pos_x \
-	+ data->m->dir_x * move_speed)][(int)data->m->pos_y] == '0')
+	+ data->m->dir_x * move_speed)][(int)data->m->pos_y] != '1')
 		data->m->pos_x += data->m->dir_x * move_speed;
 	if (data->input->parsed_map[(int)data->m->pos_x][(int)(data->m->pos_y \
-	+ data->m->dir_y * move_speed)] == '0')
+	+ data->m->dir_y * move_speed)] != '1')
 		data->m->pos_y += data->m->dir_y * move_speed;
 }
 
@@ -37,10 +37,10 @@ void	move_down(t_data *data)
 
 	move_speed = 0.8;
 	if (data->input->parsed_map[(int)(data->m->pos_x \
-	- data->m->dir_x * move_speed)][(int)data->m->pos_y] == '0')
+	- data->m->dir_x * move_speed)][(int)data->m->pos_y] != '1')
 		data->m->pos_x -= data->m->dir_x * move_speed;
 	if (data->input->parsed_map[(int)data->m->pos_x][(int)(data->m->pos_y \
-	- data->m->dir_y * move_speed)] == '0')
+	- data->m->dir_y * move_speed)] != '1')
 		data->m->pos_y -= data->m->dir_y * move_speed;
 }
 
@@ -50,10 +50,10 @@ void	move_left(t_data *data)
 
 	move_speed = 0.8;
 	if (data->input->parsed_map[(int)(data->m->pos_x \
-	- data->m->plane_x * move_speed)][(int)data->m->pos_y] == '0')
+	- data->m->plane_x * move_speed)][(int)data->m->pos_y] != '1')
 		data->m->pos_x -= data->m->plane_x * move_speed;
 	if (data->input->parsed_map[(int)data->m->pos_x][(int)(data->m->pos_y \
-	- data->m->plane_y * move_speed)] == '0')
+	- data->m->plane_y * move_speed)] != '1')
 		data->m->pos_y -= data->m->plane_y * move_speed;
 }
 
@@ -63,9 +63,9 @@ void	move_right(t_data *data)
 
 	move_speed = 0.8;
 	if (data->input->parsed_map[(int)(data->m->pos_x \
-	+ data->m->plane_x * move_speed)][(int)data->m->pos_y] == '0')
+	+ data->m->plane_x * move_speed)][(int)data->m->pos_y] != '1')
 		data->m->pos_x += data->m->plane_x * move_speed;
 	if (data->input->parsed_map[(int)data->m->pos_x][(int)(data->m->pos_y \
-	+ data->m->plane_y * move_speed)] == '0')
+	+ data->m->plane_y * move_speed)] != '1')
 		data->m->pos_y += data->m->plane_y * move_speed;
 }
