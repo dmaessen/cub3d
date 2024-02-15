@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_input.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahornstr <ahornstr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 10:41:23 by dmaessen          #+#    #+#             */
-/*   Updated: 2024/02/14 17:24:56 by ahornstr         ###   ########.fr       */
+/*   Updated: 2024/02/15 19:17:09 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,7 @@ int	parse_line(t_data *data, char *line)
 	char	**str;
 	int		i;
 
+	data->input->player = false;
 	str = ft_split(line, ' ');
 	if (!str)
 		err_msg("Spliting line\n");

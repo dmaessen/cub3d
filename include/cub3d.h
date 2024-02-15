@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ahornstr <ahornstr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 10:43:40 by dmaessen          #+#    #+#             */
-/*   Updated: 2024/02/15 14:24:31 by dmaessen         ###   ########.fr       */
+/*   Updated: 2024/02/15 17:21:35 by ahornstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -247,6 +247,7 @@ void			check_doubles(t_textures *t);
 
 void			syntax_check(t_data *data, char *line);
 void			wall_check(t_data *data);
+void			find_player(char **map);
 
 /* RAYCASTING */
 void			start(void *param);

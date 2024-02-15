@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 14:09:00 by dmaessen          #+#    #+#             */
-/*   Updated: 2024/02/15 17:58:37 by dmaessen         ###   ########.fr       */
+/*   Updated: 2024/02/15 19:10:28 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,6 @@ void	drawing(t_data *data)
 	int	y;
 
 	data->m->texture_x = (int)(data->m->wall_x * (double)TEXWIDTH);
-	// if (data->m->side == 0 && data->m->ray_dir_x > 0)
-	// 	data->m->texture_x = TEXWIDTH - data->m->texture_x - 1;
-	// if (data->m->side == 1 && data->m->ray_dir_y < 0)
-	// 	data->m->texture_x = TEXWIDTH - data->m->texture_x - 1;
 	data->m->step = 1.0 * TEXHEIGHT / data->m->line_height;
 	data->m->texture_pos = (data->m->draw_start - HEIGHT / 2 \
 	+ data->m->line_height / 2) * data->m->step;
@@ -74,16 +70,22 @@ void	drawing(t_data *data)
 	}
 }
 
+/*
+	NO texture = 0
+	SO texture = 1
+	WE texture = 2
+	EA texture = 3
+*/
 mlx_texture_t	*which_wall(t_data *data)
 {
 	if (data->m->ray_dir_y >= 0 && data->m->side == 1)
-		return (data->wall[0].tex);
-	else if (data->m->ray_dir_y <= 0 && data->m->side == 1)
-		return (data->wall[1].tex);
-	else if (data->m->ray_dir_x >= 0 && data->m->side == 0)
-		return (data->wall[2].tex);
-	else
 		return (data->wall[3].tex);
+	else if (data->m->ray_dir_y <= 0 && data->m->side == 1)
+		return (data->wall[2].tex);
+	else if (data->m->ray_dir_x >= 0 && data->m->side == 0)
+		return (data->wall[1].tex);
+	else
+		return (data->wall[0].tex);
 }
 
 unsigned int	get_pixel(mlx_texture_t *t, uint32_t x, uint32_t y)
