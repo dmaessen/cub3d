@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 10:32:24 by dmaessen          #+#    #+#             */
-/*   Updated: 2022/10/31 18:23:18 by dmaessen         ###   ########.fr       */
+/*   Updated: 2024/02/16 11:32:15 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	*ft_strdup(const char *s1)
 	char	*ptr;
 
 	size = ft_strlen(s1);
-	ptr = (char *)malloc((size + 1) * sizeof(char));
+	ptr = malloc((size + 1) * sizeof(char));
 	if (ptr == NULL)
 		return (NULL);
 	i = 0;

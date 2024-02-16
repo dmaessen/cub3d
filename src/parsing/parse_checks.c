@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 15:26:02 by dmaessen          #+#    #+#             */
-/*   Updated: 2024/02/15 13:03:59 by dmaessen         ###   ########.fr       */
+/*   Updated: 2024/02/16 11:45:49 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ int	format_validation(char *file)
 	if (!res)
 		err_msg("Malloc failed.\n");
 	if (ft_strcmp(res, ".cub") != 0)
-		free(res);
+		return (free(res), 1);
+	free(res);
 	return (0);
 }
 

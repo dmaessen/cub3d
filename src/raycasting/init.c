@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 13:53:16 by dmaessen          #+#    #+#             */
-/*   Updated: 2024/02/15 19:08:27 by dmaessen         ###   ########.fr       */
+/*   Updated: 2024/02/16 11:30:05 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static void	init_datamap(t_data *data)
 
 static void	load_textures(t_data *data)
 {
-	data->wall = malloc(4 * sizeof(t_wall));
+	data->wall = calloc_exit(4, sizeof(t_wall));
 	if (!data->wall)
 		return (err_msg("malloc failed"));
 	data->wall[0].tex = NULL;
@@ -126,12 +126,12 @@ void	dir_player(t_data *data)
 	}
 	if (data->input->player_facing == P_EAST)
 	{
-		data->m->dir_x = -1;
+		data->m->dir_x = 0;
 		data->m->dir_y = 1;
 	}
 	if (data->input->player_facing == P_WEST)
 	{
 		data->m->dir_x = 0;
-		data->m->dir_y = 1;
+		data->m->dir_y = -1;
 	}
 }
