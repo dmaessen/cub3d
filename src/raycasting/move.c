@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   move.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ahornstr <ahornstr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 13:45:23 by dmaessen          #+#    #+#             */
-/*   Updated: 2024/02/14 18:36:34 by dmaessen         ###   ########.fr       */
+/*   Updated: 2024/02/16 12:46:02 by ahornstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,5 +74,5 @@ void	move(void *param)
 	else if (mlx_is_key_down(data->mlx, MLX_KEY_RIGHT))
 		look_right((t_data *)param);
 	else if (mlx_is_key_down(data->mlx, MLX_KEY_ESCAPE))
-		exit(EXIT_SUCCESS);
+		mlx_close_window(data->mlx);
 }

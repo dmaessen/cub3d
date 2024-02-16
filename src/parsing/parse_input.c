@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_input.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ahornstr <ahornstr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 10:41:23 by dmaessen          #+#    #+#             */
-/*   Updated: 2024/02/16 11:33:30 by dmaessen         ###   ########.fr       */
+/*   Updated: 2024/02/16 13:05:10 by ahornstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,18 +20,6 @@
 static void	init_data(t_data *data)
 {
 	data->textures = calloc_exit(1, sizeof(t_textures));
-	data->textures->no_texture = ft_strdup("-1");
-	if (!data->textures->no_texture)
-		err_msg("Malloc failed\n");
-	data->textures->so_texture = ft_strdup("-1");
-	if (!data->textures->so_texture)
-		err_msg("Malloc failed\n");
-	data->textures->we_texture = ft_strdup("-1");
-	if (!data->textures->we_texture)
-		err_msg("Malloc failed\n");
-	data->textures->ea_texture = ft_strdup("-1");
-	if (!data->textures->ea_texture)
-		err_msg("Malloc failed\n");
 	data->colors = calloc_exit(1, sizeof(t_colors));
 	data->colors->c_color_b = -1;
 	data->colors->c_color_g = -1;
@@ -92,9 +80,6 @@ void	add_data(t_data *data, char **str, int i)
 		data->textures->ea_texture = ft_strdup_check(str[i + 1]);
 		check_image(data->textures->ea_texture);
 	}
-	if (!data->textures->no_texture || !data->textures->so_texture
-		|| !data->textures->we_texture || !data->textures->ea_texture)
-		err_msg("Malloc failed\n");
 }
 
 int	parse_line(t_data *data, char *line)
