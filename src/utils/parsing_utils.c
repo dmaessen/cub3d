@@ -6,7 +6,7 @@
 /*   By: ahornstr <ahornstr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 10:41:41 by dmaessen          #+#    #+#             */
-/*   Updated: 2024/02/15 13:39:36 by ahornstr         ###   ########.fr       */
+/*   Updated: 2024/02/16 13:07:17 by ahornstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ char	*rm_spaces(char *line)
 	return (newline);
 }
 
-char	*ft_strdup_check(const char *s1)
+char	*ft_strdup_check(char *s1)
 {
 	int		i;
 	int		size;
