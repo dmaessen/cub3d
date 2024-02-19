@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ahornstr <ahornstr@student.42.fr>          +#+  +:+       +#+         #
+#    By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/31 10:43:27 by dmaessen          #+#    #+#              #
-#    Updated: 2024/02/15 14:03:26 by ahornstr         ###   ########.fr        #
+#    Updated: 2024/02/16 12:44:33 by dmaessen         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = cub3D
 
 CC = cc
 
-CFLAGS = -Wall -Wextra -Werror -Wunreachable-code -Ofast #-g -O1
+CFLAGS = -Wall -Wextra -Werror -Wunreachable-code -Ofast -g #-fsanitize=leak #-O1
 
 LIBFT = libft/libft.a
 
@@ -41,12 +41,16 @@ $(OBJ_DIR)%.o : %.c
 	@$(CC) $(CFLAGS) -o $@ -c $< $(HEADERS)
 
 libmlx42:
-	@cmake MLX42 -B MLX42/build && make -C MLX42/build -j4
+	@git submodule update --init
+	@if [ ! -f MLX42/build/libmlx42.a ]; then \
+		cmake MLX42 -B MLX42/build && make -C MLX42/build -j4; \
+	fi
+#	@cmake MLX42 -B MLX42/build && make -C MLX42/build -j4
 
 libft_build:
 	@$(MAKE) -C libft/
 
-$(NAME): $(OBJECTS_PREFIXED) 
+$(NAME): $(OBJECTS_PREFIXED) libmlx42
 	@$(CC) $(OBJECTS_PREFIXED) $(LIB) $(HEADERS) -o $(NAME)
 	@echo "cub3d is ready!"
 

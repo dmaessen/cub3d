@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ahornstr <ahornstr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 10:41:34 by dmaessen          #+#    #+#             */
-/*   Updated: 2024/02/14 17:10:36 by dmaessen         ###   ########.fr       */
+/*   Updated: 2024/02/16 12:55:58 by ahornstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,17 +28,19 @@ void	free_str(char **str)
 
 void	free_struct(t_data *data)
 {
+	printf("here");
 	free(data->textures->no_texture);
-	data->textures->no_texture = NULL;
-	free(data->textures->so_texture);
-	data->textures->so_texture = NULL;
 	free(data->textures->we_texture);
-	data->textures->we_texture = NULL;
+	free(data->textures->so_texture);
 	free(data->textures->ea_texture);
-	data->textures->ea_texture = NULL;
+	mlx_delete_texture(data->wall[0].tex);
+	mlx_delete_texture(data->wall[1].tex);
+	mlx_delete_texture(data->wall[2].tex);
+	mlx_delete_texture(data->wall[3].tex);
+	free(data->wall);
 	free(data->textures);
 	free(data->colors);
-	free(data->input);
 	free_str(data->input->parsed_map);
+	free(data->input);
 	free(data->m);
 }

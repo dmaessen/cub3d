@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   background.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ahornstr <ahornstr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 14:45:11 by dmaessen          #+#    #+#             */
-/*   Updated: 2024/02/14 17:16:56 by dmaessen         ###   ########.fr       */
+/*   Updated: 2024/02/16 13:00:49 by ahornstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	background_img(t_data *data)
 		if (y > (HEIGHT / 2))
 			color = color_floor;
 		x = -1;
-		while (x++ < WIDTH)
+		while (++x < WIDTH)
 			mlx_put_pixel(data->img_back, x, y, color);
 		y++;
 	}

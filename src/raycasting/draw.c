@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 14:09:00 by dmaessen          #+#    #+#             */
-/*   Updated: 2024/02/15 19:10:28 by dmaessen         ###   ########.fr       */
+/*   Updated: 2024/02/16 10:53:02 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,13 +79,13 @@ void	drawing(t_data *data)
 mlx_texture_t	*which_wall(t_data *data)
 {
 	if (data->m->ray_dir_y >= 0 && data->m->side == 1)
-		return (data->wall[3].tex);
+		return (data->wall[P_EAST].tex);
 	else if (data->m->ray_dir_y <= 0 && data->m->side == 1)
-		return (data->wall[2].tex);
+		return (data->wall[P_WEST].tex);
 	else if (data->m->ray_dir_x >= 0 && data->m->side == 0)
-		return (data->wall[1].tex);
+		return (data->wall[P_SOUTH].tex);
 	else
-		return (data->wall[0].tex);
+		return (data->wall[P_NORTH].tex);
 }
 
 unsigned int	get_pixel(mlx_texture_t *t, uint32_t x, uint32_t y)
