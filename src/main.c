@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 10:41:44 by dmaessen          #+#    #+#             */
-/*   Updated: 2024/02/15 11:30:35 by dmaessen         ###   ########.fr       */
+/*   Updated: 2024/02/19 15:23:51 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	main(int argc, char **argv)
 		{
 			data->mlx = mlx_init(WIDTH, HEIGHT, "cub3D", false);
 			if (!data->mlx)
-				return (err_msg("init mlx\n"), 1);
+				return (err_msg("init mlx\n"), 1); // check
 			init_map(data, data->mlx);
 			background_img(data);
 			mlx_image_to_window(data->mlx, data->img, 0, 0);

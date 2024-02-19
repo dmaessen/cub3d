@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_input.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahornstr <ahornstr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 10:41:23 by dmaessen          #+#    #+#             */
-/*   Updated: 2024/02/16 13:05:10 by ahornstr         ###   ########.fr       */
+/*   Updated: 2024/02/19 15:19:26 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static void	split_colorcode(t_data *data, char *color, int id)
 
 	color_code = ft_split(color, ',');
 	if (!color_code)
-		err_msg("Split failed\n");
+		err_msg_free("Split failed\n", 2, data); // but then str from the other needs freeing too..
 	if (id == 1)
 	{
 		if (color_code[0])
@@ -90,7 +90,7 @@ int	parse_line(t_data *data, char *line)
 	data->input->player = false;
 	str = ft_split(line, ' ');
 	if (!str)
-		err_msg("Spliting line\n");
+		err_msg_free("Spliting line\n", 1, data);
 	i = 0;
 	while (str[i])
 	{
@@ -133,7 +133,8 @@ int	input_validation(t_data *data, char *file)
 		free(line);
 	}
 	close(fd);
-	check_doubles(data->textures);
-	validate_colors(data->colors);
+	if (check_doubles(data->textures) == 1
+	|| validate_colors(data->colors) == 1)
+		free_exit(data);
 	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahornstr <ahornstr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 10:43:40 by dmaessen          #+#    #+#             */
-/*   Updated: 2024/02/15 17:21:35 by ahornstr         ###   ########.fr       */
+/*   Updated: 2024/02/19 15:21:53 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -225,7 +225,7 @@ int				format_validation(char *file);
  * if they're not throws an error message saying so
  * @param colors struct hosting the color codes
  */
-void			validate_colors(t_colors *colors);
+int			validate_colors(t_colors *colors);
 /**
  * first checks if the path to the texture has a dot/. as well as 
  * the lenght of the path
@@ -243,7 +243,7 @@ void			check_image(char *path);
  * being the same.
  * @param t struct hosting the NO/SO/WE/EA textures
  */
-void			check_doubles(t_textures *t);
+int			check_doubles(t_textures *t);
 
 void			syntax_check(t_data *data, char *line);
 void			wall_check(t_data *data);

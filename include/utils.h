@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahornstr <ahornstr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 10:43:43 by dmaessen          #+#    #+#             */
-/*   Updated: 2024/02/16 12:57:16 by ahornstr         ###   ########.fr       */
+/*   Updated: 2024/02/19 15:14:26 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,18 @@
 /**
  * prints out "Error" followed by an explicit error message on a new line
  * @param str error message
+ * @param i position where the call was made so we can accordingly 
+ * free what needs to be in the struct
  */
 void	err_msg(char *str);
+
+/**
+ * prints out "Error" followed by an explicit error message on a new line
+ * @param str error message
+ * @param i position where the call was made so we can accordingly 
+ * free what needs to be in the struct
+ */
+void	err_msg_free(char *str, int i, t_data *data);
 
 /**
  * frees the content of str single and double pointer
@@ -65,5 +75,7 @@ char	*rm_spaces(char *line);
 
 char	*ft_strdup_check(char *s1);
 int		ft_strarrlen(char **arr);
+void    free_exit(t_data *data);
+void    print_msg(char *str);
 
 #endif

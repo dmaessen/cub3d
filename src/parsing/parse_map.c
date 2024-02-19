@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 10:41:28 by dmaessen          #+#    #+#             */
-/*   Updated: 2024/02/15 19:17:40 by dmaessen         ###   ########.fr       */
+/*   Updated: 2024/02/19 15:28:21 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,14 +77,14 @@ static int	parse_map(t_data *data, char *line, int i, int j)
 {
 	char	*newline;
 
-	syntax_check(data, line);
+	syntax_check(data, line); // err_msg_free level 3 in these functions
 	if (data->texture_count > 6)
-		err_msg("Too many textures");
-	newline = rm_spaces(line);
+		err_msg_free("Too many textures", 3, data);
+	newline = rm_spaces(line); // calloc exit in there
 	if (i > 6)
 	{
 		data->input->parsed_map[i - 7] = \
-		calloc_exit(ft_strlen(line) + 1, sizeof(char));
+		calloc_exit(ft_strlen(line) + 1, sizeof(char)); // maybe just put back to normal calloc
 		save_line(data, line, i - 7);
 		if (i == 7 || i == data->input->nb_lines)
 		{
@@ -108,7 +108,7 @@ int	map_validation(t_data *data, char *file, int i)
 
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
-		err_msg("Opening the file\n");
+		err_msg_free("Opening the file\n", 2, data);
 	data->input->parsed_map = \
 	calloc_exit((data->input->nb_lines - 6) + 1, sizeof(char *));
 	data->texture_count = 0;
