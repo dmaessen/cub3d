@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_checks.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ahornstr <ahornstr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 15:26:02 by dmaessen          #+#    #+#             */
-/*   Updated: 2024/02/16 11:45:49 by dmaessen         ###   ########.fr       */
+/*   Updated: 2024/02/19 15:20:43 by ahornstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,14 +56,14 @@ void	validate_colors(t_colors *colors)
 
 static void	check_missing_texture(t_textures *t)
 {
-	if (ft_strcmp(t->no_texture, "-1") == 0)
+	if (!t->no_texture)
 		err_msg("NO texture missing.\n");
-	if (ft_strcmp(t->so_texture, "-1") == 0)
-		err_msg("SO texture missing.\n");
-	if (ft_strcmp(t->we_texture, "-1") == 0)
-		err_msg("WE texture missing.\n");
-	if (ft_strcmp(t->ea_texture, "-1") == 0)
+	if (!t->ea_texture)
 		err_msg("EA texture missing.\n");
+	if (!t->we_texture)
+		err_msg("WE texture missing.\n");
+	if (!t->so_texture)
+		err_msg("SO texture missing.\n");
 }
 
 void	check_doubles(t_textures *t)

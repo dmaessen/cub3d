@@ -6,7 +6,7 @@
 /*   By: ahornstr <ahornstr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 10:41:34 by dmaessen          #+#    #+#             */
-/*   Updated: 2024/02/16 12:55:58 by ahornstr         ###   ########.fr       */
+/*   Updated: 2024/02/19 14:40:50 by ahornstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ void	free_str(char **str)
 
 void	free_struct(t_data *data)
 {
-	printf("here");
 	free(data->textures->no_texture);
 	free(data->textures->we_texture);
 	free(data->textures->so_texture);

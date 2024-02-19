@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_file.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ahornstr <ahornstr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 17:36:45 by ahornstr          #+#    #+#             */
-/*   Updated: 2024/02/15 19:11:08 by dmaessen         ###   ########.fr       */
+/*   Updated: 2024/02/19 14:43:54 by ahornstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,21 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+void	dupe_texture(t_data *data, char *line, int i)
+{
+	char	*temp;
+	
+	temp = ft_substr(line, i, i + 2);
+	if (ft_strcmp(temp, "NO") < 0 && ft_strcmp(temp, "SO") < 0 && \
+		ft_strcmp(temp, "WE") < 0 && ft_strcmp(temp, "EA") < 0)
+	{
+			free(temp);
+			err_msg("Wrong texture assignments");
+	}
+	data->texture_count++;
+	free (temp);
+}
+
 void	syntax_check(t_data *data, char *line)
 {
 	int	i;
@@ -24,10 +39,12 @@ void	syntax_check(t_data *data, char *line)
 	i = -1;
 	while (line[++i])
 	{
+		while (line[i] == ' ' || line[i] == '\t')
+			i++;
 		if (line[i] == '\0' || line[i] == '\n')
 			return ;
 		if (!ft_strchr("NSWFCE1 \t", line[i]))
-			err_msg("Wrong texture assignments {1}");
+			err_msg("Invalid line in file");
 		if (ft_strchr("FC1 \t", line [i]))
 		{
 			if (ft_strchr("FC", line [i]))
@@ -36,11 +53,7 @@ void	syntax_check(t_data *data, char *line)
 		}
 		if (ft_strchr("NSEW", line[i]))
 		{
-			if (ft_strncmp(line, "NO", 2) < 0 && \
-			ft_strncmp(line, "SO", 2) < 0 && \
-			ft_strncmp(line, "WE", 2) < 0 && ft_strncmp(line, "EA", 2) < 0)
-				err_msg("Wrong texture assignments {2}");
-			data->texture_count++;
+			dupe_texture(data, line, i);
 			return ;
 		}
 	}

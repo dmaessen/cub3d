@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ahornstr <ahornstr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 10:41:28 by dmaessen          #+#    #+#             */
-/*   Updated: 2024/02/15 19:17:40 by dmaessen         ###   ########.fr       */
+/*   Updated: 2024/02/19 15:27:44 by ahornstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ static void	check_middlemap(t_data *data, char *line, int j)
 	}
 }
 
-static int	parse_map(t_data *data, char *line, int i, int j)
+static void	parse_map(t_data *data, char *line, int i, int j)
 {
 	char	*newline;
 
@@ -98,7 +98,7 @@ static int	parse_map(t_data *data, char *line, int i, int j)
 		else
 			check_middlemap(data, newline, j);
 	}
-	return (free(newline), 0);
+	free(newline);
 }
 
 int	map_validation(t_data *data, char *file, int i)
@@ -119,8 +119,7 @@ int	map_validation(t_data *data, char *file, int i)
 			break ;
 		if (ft_strcmp(line, "\n\0") != 0)
 			i++;
-		if (parse_map(data, line, i, 0) == 1)
-			return (free(line), close(fd), 1);
+		parse_map(data, line, i, 0);
 		free(line);
 	}
 	find_player(data->input->parsed_map);
