@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: domi <domi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 10:43:43 by dmaessen          #+#    #+#             */
-/*   Updated: 2024/02/19 15:14:26 by dmaessen         ###   ########.fr       */
+/*   Updated: 2024/02/19 20:52:25 by domi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,18 +64,26 @@ int		ft_strcmp(const char *s1, const char *s2);
  * @param count 
  * @param size
  */
-void	*calloc_exit(size_t count, size_t size);
+void	*calloc_exit(size_t count, size_t size, t_data *data, int code);
 /**
  * to facilitate the parsing of the map all the spaces are removed to be able 
  * to identify.
  * unwanted characters in the map
  * @param line line read from the input file
  */
-char	*rm_spaces(char *line);
+char	*rm_spaces(char *line, int code, t_data *data);
 
 char	*ft_strdup_check(char *s1);
 int		ft_strarrlen(char **arr);
 void    free_exit(t_data *data);
 void    print_msg(char *str);
+void	free_exit(t_data *data);
+void	free_struct_exit(t_data *data);
+
+void	free_struct_all(t_data *data);
+void	free_tex1(t_data *data);
+void	free_tex2(t_data *data);
+void	free_tex3(t_data *data);
+void	free_tex4(t_data *data);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: domi <domi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 10:43:40 by dmaessen          #+#    #+#             */
-/*   Updated: 2024/02/19 15:38:47 by dmaessen         ###   ########.fr       */
+/*   Updated: 2024/02/19 20:18:07 by domi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -194,7 +194,7 @@ void			is_walkable_path(t_data *data);
  * @param row row in the map to check
  * @param id start position of the player on the map
  */
-void			check_walkable(char **map, int row, int id);
+void			check_walkable(t_data *data, char **map, int row, int id);
 /**
  * loops through the map, each time it encounters a space 
  * if redirect to check_line().
@@ -225,7 +225,7 @@ int				format_validation(char *file);
  * if they're not throws an error message saying so
  * @param colors struct hosting the color codes
  */
-int			validate_colors(t_colors *colors);
+int				validate_colors(t_colors *colors);
 /**
  * first checks if the path to the texture has a dot/. as well as 
  * the lenght of the path
@@ -247,7 +247,7 @@ int			check_doubles(t_textures *t);
 
 void			syntax_check(t_data *data, char *line);
 void			wall_check(t_data *data);
-void			find_player(char **map);
+void			find_player(t_data *data, char **map);
 
 /* RAYCASTING */
 void			start(void *param);

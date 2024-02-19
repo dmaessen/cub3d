@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+         #
+#    By: domi <domi@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/31 10:43:27 by dmaessen          #+#    #+#              #
-#    Updated: 2024/02/16 12:44:33 by dmaessen         ###   ########.fr        #
+#    Updated: 2024/02/19 20:29:05 by domi             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ LIB = MLX42/build/libmlx42.a -ldl -lglfw -pthread -lm $(LIBFT)
 SRC =  src/main.c \
 	src/parsing/parse_input.c src/parsing/parse_file.c src/parsing/parse_map.c \
 	src/parsing/parse_spaces.c src/parsing/parse_checks.c \
-	src/utils/error_msg.c src/utils/free.c src/utils/parsing_utils.c \
+	src/utils/error_msg.c src/utils/free.c src/utils/parsing_utils.c src/utils/free_text.c \
 	src/raycasting/start_loop.c src/raycasting/move.c src/raycasting/init.c src/raycasting/draw.c \
 	src/raycasting/background.c src/raycasting/move_keys.c \
 

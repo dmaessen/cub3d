@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahornstr <ahornstr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: domi <domi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 10:41:41 by dmaessen          #+#    #+#             */
-/*   Updated: 2024/02/16 13:07:17 by ahornstr         ###   ########.fr       */
+/*   Updated: 2024/02/19 20:52:54 by domi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,14 @@ int	ft_strcmp(const char *s1, const char *s2)
 	return (0);
 }
 
-void	*calloc_exit(size_t count, size_t size)
+void	*calloc_exit(size_t count, size_t size, t_data *data, int code)
 {
 	size_t	i;
 	char	*ptr;
 
 	ptr = malloc(count * size);
 	if (!ptr)
-		err_msg("Calloc failed.\n");
+		err_msg_free("Calloc failed.\n", code, data);
 	i = 0;
 	while (i < count * size)
 	{
@@ -46,7 +46,7 @@ void	*calloc_exit(size_t count, size_t size)
 	return (ptr);
 }
 
-char	*rm_spaces(char *line)
+char	*rm_spaces(char *line, int code, t_data *data)
 {
 	char	*newline;
 	int		i;
@@ -60,7 +60,7 @@ char	*rm_spaces(char *line)
 		if (line[i] == ' ')
 			spaces++;
 	}
-	newline = calloc_exit((ft_strlen(line) - spaces + 1), sizeof(char));
+	newline = calloc_exit((ft_strlen(line) - spaces + 1), sizeof(char), data, code);
 	i = -1;
 	j = 0;
 	while (line[++i])

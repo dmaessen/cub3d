@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: domi <domi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 14:09:00 by dmaessen          #+#    #+#             */
-/*   Updated: 2024/02/16 10:53:02 by dmaessen         ###   ########.fr       */
+/*   Updated: 2024/02/19 20:27:08 by domi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,12 +70,6 @@ void	drawing(t_data *data)
 	}
 }
 
-/*
-	NO texture = 0
-	SO texture = 1
-	WE texture = 2
-	EA texture = 3
-*/
 mlx_texture_t	*which_wall(t_data *data)
 {
 	if (data->m->ray_dir_y >= 0 && data->m->side == 1)

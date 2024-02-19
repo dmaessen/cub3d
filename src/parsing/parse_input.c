@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_input.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: domi <domi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 10:41:23 by dmaessen          #+#    #+#             */
-/*   Updated: 2024/02/19 15:39:22 by dmaessen         ###   ########.fr       */
+/*   Updated: 2024/02/19 20:38:21 by domi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,33 @@
 
 static void	init_data(t_data *data)
 {
-	data->textures = calloc_exit(1, sizeof(t_textures));
-	data->colors = calloc_exit(1, sizeof(t_colors));
+	data->textures = calloc(1, sizeof(t_textures));
+	if (!data->textures)
+	{	
+		free(data);
+		exit(1);
+	}
+	data->colors = calloc(1, sizeof(t_colors));
+	if (!data->colors)
+	{	
+		free(data->textures);
+		free(data);
+		exit(1);
+	}
 	data->colors->c_color_b = -1;
 	data->colors->c_color_g = -1;
 	data->colors->c_color_r = -1;
 	data->colors->f_color_b = -1;
 	data->colors->f_color_g = -1;
 	data->colors->f_color_r = -1;
-	data->input = calloc_exit(1, sizeof(t_data_input));
+	data->input = calloc(1, sizeof(t_data_input));
+	if (!data->input)
+	{	
+		free(data->textures);
+		free(data->colors);
+		free(data);
+		exit(1);
+	}
 }
 
 static void	split_colorcode(t_data *data, char *color, int id)

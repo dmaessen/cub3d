@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_spaces.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: domi <domi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 10:41:28 by dmaessen          #+#    #+#             */
-/*   Updated: 2024/02/15 11:27:32 by dmaessen         ###   ########.fr       */
+/*   Updated: 2024/02/19 20:17:47 by domi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,8 @@ void	parse_spaces(t_data *data)
 			{
 				if (check_line(data->input->parsed_map, i - 1, j) != 0
 					|| check_line(data->input->parsed_map, i + 1, j) != 0)
-					err_msg("Invalid map, a wall is \
-					missing to properly enclose the map\n");
+					err_msg_free("Invalid map, a wall is \
+					missing to properly enclose the map\n", 3, data);
 			}
 			j++;
 		}
@@ -89,7 +89,7 @@ static int	check_walkable2(char **map, int i, int j, int id)
 	return (step);
 }
 
-void	check_walkable(char **map, int row, int id)
+void	check_walkable(t_data *data, char **map, int row, int id)
 {
 	int	i;
 	int	j;
@@ -115,7 +115,7 @@ void	check_walkable(char **map, int row, int id)
 		i++;
 	}
 	if (step < 1)
-		err_msg("Invalid map, no walk-able path for the player\n");
+		err_msg_free("Invalid map, no walk-able path for the player\n", 3, data);
 }
 
 void	is_walkable_path(t_data *data)
@@ -134,7 +134,7 @@ void	is_walkable_path(t_data *data)
 				|| data->input->parsed_map[i][j] == 'W'
 				|| data->input->parsed_map[i][j] == 'E')
 			{
-				check_walkable(data->input->parsed_map, i, j);
+				check_walkable(data, data->input->parsed_map, i, j);
 				break ;
 			}
 			j++;

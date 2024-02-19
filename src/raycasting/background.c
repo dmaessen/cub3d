@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   background.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahornstr <ahornstr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: domi <domi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 14:45:11 by dmaessen          #+#    #+#             */
-/*   Updated: 2024/02/16 13:00:49 by ahornstr         ###   ########.fr       */
+/*   Updated: 2024/02/19 20:26:34 by domi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	background_img(t_data *data)
 
 	data->img_back = mlx_new_image(data->mlx, WIDTH, HEIGHT);
 	if (!data->img_back)
-		return (err_msg("mlx_new_image failed"));
+		return (print_msg("mlx_new_image failed"), free_struct_exit(data));
 	mlx_image_to_window(data->mlx, data->img_back, 0, 0);
 	color = ft_pixel(data->colors->c_color_r, \
 	data->colors->c_color_g, data->colors->c_color_b, 0xFF);
