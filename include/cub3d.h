@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 10:43:40 by dmaessen          #+#    #+#             */
-/*   Updated: 2024/02/19 15:21:53 by dmaessen         ###   ########.fr       */
+/*   Updated: 2024/02/19 15:38:47 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,7 +154,7 @@ int				input_validation(t_data *data, char *file);
  * @param data main struct
  * @param file file hosting the map and texture/colors
  */
-int				parse_line(t_data *data, char *line);
+void			parse_line(t_data *data, char *line);
 /**
  * adds the argv coming after the texture/color identifer (NO/SO/EA/WE/C/F) 
  * to the struct, saving it for later

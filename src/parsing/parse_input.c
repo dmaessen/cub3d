@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 10:41:23 by dmaessen          #+#    #+#             */
-/*   Updated: 2024/02/19 15:19:26 by dmaessen         ###   ########.fr       */
+/*   Updated: 2024/02/19 15:39:22 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void	add_data(t_data *data, char **str, int i)
 	}
 }
 
-int	parse_line(t_data *data, char *line)
+void	parse_line(t_data *data, char *line)
 {
 	char	**str;
 	int		i;
@@ -106,7 +106,6 @@ int	parse_line(t_data *data, char *line)
 		i++;
 	}
 	free_str(str);
-	return (0);
 }
 
 int	input_validation(t_data *data, char *file)
@@ -128,8 +127,7 @@ int	input_validation(t_data *data, char *file)
 			break ;
 		if (ft_strcmp(line, "\n\0") != 0)
 			data->input->nb_lines++;
-		if (parse_line(data, line) == 1)
-			return (free(line), close(fd), 1);
+		parse_line(data, line);
 		free(line);
 	}
 	close(fd);

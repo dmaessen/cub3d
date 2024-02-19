@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 15:26:02 by dmaessen          #+#    #+#             */
-/*   Updated: 2024/02/19 15:22:42 by dmaessen         ###   ########.fr       */
+/*   Updated: 2024/02/19 15:39:25 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,15 +58,14 @@ int	validate_colors(t_colors *colors)
 
 static int	check_missing_texture(t_textures *t)
 {
-	if (ft_strcmp(t->no_texture, "-1") == 0)
-		return (print_msg("NO texture missing.\n"), 1);
-	if (ft_strcmp(t->so_texture, "-1") == 0)
-		return (print_msg("SO texture missing.\n"), 1);
-	if (ft_strcmp(t->we_texture, "-1") == 0)
-		return (print_msg("WE texture missing.\n"), 1);
-	if (ft_strcmp(t->ea_texture, "-1") == 0)
-		return (print_msg("EA texture missing.\n"), 1);
-	return (0);
+	if (!t->no_texture)
+		err_msg("NO texture missing.\n");
+	if (!t->ea_texture)
+		err_msg("EA texture missing.\n");
+	if (!t->we_texture)
+		err_msg("WE texture missing.\n");
+	if (!t->so_texture)
+		err_msg("SO texture missing.\n");
 }
 
 int	check_doubles(t_textures *t)
