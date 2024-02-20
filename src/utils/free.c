@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 10:41:34 by dmaessen          #+#    #+#             */
-/*   Updated: 2024/02/20 12:04:28 by dmaessen         ###   ########.fr       */
+/*   Updated: 2024/02/20 15:12:25 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ void	print_msg(char *str)
 
 void	free_exit(t_data *data)
 {
+	free(data->input);
 	free(data->textures->no_texture);
 	free(data->textures->we_texture);
 	free(data->textures->so_texture);

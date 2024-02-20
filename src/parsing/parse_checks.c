@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 15:26:02 by dmaessen          #+#    #+#             */
-/*   Updated: 2024/02/20 11:53:40 by dmaessen         ###   ########.fr       */
+/*   Updated: 2024/02/20 15:12:53 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,10 @@ int	format_validation(char *file)
 int	validate_colors(t_colors *colors)
 {
 	if (colors->c_color_b == -1 || colors->c_color_g == -1
-		|| colors->c_color_r == -1)
+		|| colors->c_color_r == -1 || !colors->c_color_r)
 		return (print_msg("Color for the ceiling missing.\n"), 1);
 	if (colors->f_color_b == -1 || colors->f_color_g == -1
-		|| colors->f_color_r == -1)
+		|| colors->f_color_r == -1 || !colors->f_color_r)
 		return (print_msg("Color for the floor missing.\n"), 1);
 	if (colors->c_color_b < 0 || colors->c_color_b > 255
 		|| colors->c_color_r < 0 || colors->c_color_r > 255
