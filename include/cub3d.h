@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: domi <domi@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 10:43:40 by dmaessen          #+#    #+#             */
-/*   Updated: 2024/02/19 20:18:07 by domi             ###   ########.fr       */
+/*   Updated: 2024/02/20 11:56:51 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -243,11 +243,12 @@ void			check_image(char *path);
  * being the same.
  * @param t struct hosting the NO/SO/WE/EA textures
  */
-int			check_doubles(t_textures *t);
+int				check_doubles(t_textures *t);
 
 void			syntax_check(t_data *data, char *line);
 void			wall_check(t_data *data);
 void			find_player(t_data *data, char **map);
+void			init_data2(t_data *data);
 
 /* RAYCASTING */
 void			start(void *param);

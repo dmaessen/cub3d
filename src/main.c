@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 10:41:44 by dmaessen          #+#    #+#             */
-/*   Updated: 2024/02/20 10:48:01 by dmaessen         ###   ########.fr       */
+/*   Updated: 2024/02/20 12:01:55 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,5 @@ int	main(int argc, char **argv)
 			mlx_terminate(data->mlx);
 		}
 	}
-	free_struct(data);
-	free(data);
-	exit(EXIT_SUCCESS);
+	return (free_struct(data), free(data), exit(EXIT_SUCCESS), 0);
 }

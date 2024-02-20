@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: domi <domi@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 10:41:41 by dmaessen          #+#    #+#             */
-/*   Updated: 2024/02/19 20:52:54 by domi             ###   ########.fr       */
+/*   Updated: 2024/02/20 12:05:55 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,21 +46,20 @@ void	*calloc_exit(size_t count, size_t size, t_data *data, int code)
 	return (ptr);
 }
 
-char	*rm_spaces(char *line, int code, t_data *data)
+char	*rm_spaces(char *line, int code, t_data *data, int spaces)
 {
 	char	*newline;
 	int		i;
-	int		spaces;
 	int		j;
 
 	i = -1;
-	spaces = 0;
 	while (line[++i])
 	{
 		if (line[i] == ' ')
 			spaces++;
 	}
-	newline = calloc_exit((ft_strlen(line) - spaces + 1), sizeof(char), data, code);
+	newline = calloc_exit((ft_strlen(line) - spaces + 1), \
+	sizeof(char), data, code);
 	i = -1;
 	j = 0;
 	while (line[++i])

@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 10:41:30 by dmaessen          #+#    #+#             */
-/*   Updated: 2024/02/20 10:51:30 by dmaessen         ###   ########.fr       */
+/*   Updated: 2024/02/20 12:03:52 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,18 @@
 #include "../include/utils.h"
 #include <unistd.h>
 
-static void free_from_pos1(int i, t_data *data)
+static void	free_from_pos1(int i, t_data *data)
 {
 	if (i == 1)
 	{
 		free(data->textures);
 		free(data->colors);
 		free(data->input);
-		free(data); // right
+		free(data);
 	}
 }
 
-static void free_from_pos2(int i, t_data *data)
+static void	free_from_pos2(int i, t_data *data)
 {
 	if (i == 2)
 	{
@@ -36,11 +36,11 @@ static void free_from_pos2(int i, t_data *data)
 		free(data->textures);
 		free(data->colors);
 		free(data->input);
-		free(data); // right
+		free(data);
 	}
 }
 
-static void free_from_pos3(int i, t_data *data)
+static void	free_from_pos3(int i, t_data *data)
 {
 	if (i == 3)
 	{
@@ -52,7 +52,7 @@ static void free_from_pos3(int i, t_data *data)
 		free(data->colors);
 		free_str(data->input->parsed_map);
 		free(data->input);
-		free(data); // right
+		free(data);
 	}
 }
 

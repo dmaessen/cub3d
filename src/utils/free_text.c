@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_text.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: domi <domi@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 10:41:34 by dmaessen          #+#    #+#             */
-/*   Updated: 2024/02/19 20:33:55 by domi             ###   ########.fr       */
+/*   Updated: 2024/02/20 12:04:40 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ void	free_struct_all(t_data *data)
 	free(data);
 	exit(1);
 }
-
 
 void	free_tex1(t_data *data)
 {

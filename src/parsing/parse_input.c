@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 10:41:23 by dmaessen          #+#    #+#             */
-/*   Updated: 2024/02/20 11:50:14 by dmaessen         ###   ########.fr       */
+/*   Updated: 2024/02/20 11:57:02 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,19 +19,7 @@
 
 static void	init_data(t_data *data)
 {
-	data->textures = ft_calloc(1, sizeof(t_textures));
-	if (!data->textures)
-	{	
-		free(data);
-		exit(1);
-	}
-	data->colors = ft_calloc(1, sizeof(t_colors));
-	if (!data->colors)
-	{	
-		free(data->textures);
-		free(data);
-		exit(1);
-	}
+	init_data2(data);
 	data->colors->c_color_b = -1;
 	data->colors->c_color_g = -1;
 	data->colors->c_color_r = -1;
@@ -40,7 +28,7 @@ static void	init_data(t_data *data)
 	data->colors->f_color_r = -1;
 	data->input = ft_calloc(1, sizeof(t_data_input));
 	if (!data->input)
-	{	
+	{
 		free(data->textures);
 		free(data->colors);
 		free(data);
@@ -54,7 +42,7 @@ static void	split_colorcode(t_data *data, char *color, int id)
 
 	color_code = ft_split(color, ',');
 	if (!color_code)
-		err_msg_free("Split failed\n", 2, data); // but then str from the other needs freeing too..
+		err_msg_free("Split failed\n", 2, data);
 	if (id == 1)
 	{
 		if (color_code[0])
@@ -150,7 +138,7 @@ int	input_validation(t_data *data, char *file)
 	}
 	close(fd);
 	if (check_doubles(data->textures) == 1
-	|| validate_colors(data->colors) == 1)
+		|| validate_colors(data->colors) == 1)
 		free_exit(data);
 	return (0);
 }

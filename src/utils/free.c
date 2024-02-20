@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: domi <domi@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 10:41:34 by dmaessen          #+#    #+#             */
-/*   Updated: 2024/02/19 20:33:21 by domi             ###   ########.fr       */
+/*   Updated: 2024/02/20 12:04:28 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,21 +44,20 @@ void	free_struct(t_data *data)
 	free(data->m);
 }
 
-void print_msg(char *str)
+void	print_msg(char *str)
 {
 	write(2, str, ft_strlen(str));
 }
 
-void free_exit(t_data *data)
+void	free_exit(t_data *data)
 {
-	// du coup deja un message imprimer avant
 	free(data->textures->no_texture);
 	free(data->textures->we_texture);
 	free(data->textures->so_texture);
 	free(data->textures->ea_texture);
 	free(data->textures);
 	free(data->colors);
-	free(data); // right
+	free(data);
 	exit (1);
 }
 

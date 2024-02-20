@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: domi <domi@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 10:43:43 by dmaessen          #+#    #+#             */
-/*   Updated: 2024/02/19 20:52:25 by domi             ###   ########.fr       */
+/*   Updated: 2024/02/20 12:06:06 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,12 +71,12 @@ void	*calloc_exit(size_t count, size_t size, t_data *data, int code);
  * unwanted characters in the map
  * @param line line read from the input file
  */
-char	*rm_spaces(char *line, int code, t_data *data);
+char	*rm_spaces(char *line, int code, t_data *data, int spaces);
 
 char	*ft_strdup_check(char *s1);
 int		ft_strarrlen(char **arr);
-void    free_exit(t_data *data);
-void    print_msg(char *str);
+void	free_exit(t_data *data);
+void	print_msg(char *str);
 void	free_exit(t_data *data);
 void	free_struct_exit(t_data *data);
 

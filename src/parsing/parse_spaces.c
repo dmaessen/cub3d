@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_spaces.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: domi <domi@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 10:41:28 by dmaessen          #+#    #+#             */
-/*   Updated: 2024/02/19 20:17:47 by domi             ###   ########.fr       */
+/*   Updated: 2024/02/20 12:00:15 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,8 @@ void	check_walkable(t_data *data, char **map, int row, int id)
 		i++;
 	}
 	if (step < 1)
-		err_msg_free("Invalid map, no walk-able path for the player\n", 3, data);
+		err_msg_free("Invalid map, no walk-able\
+		path for the player\n", 3, data);
 }
 
 void	is_walkable_path(t_data *data)

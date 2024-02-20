@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_file.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: domi <domi@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 17:36:45 by ahornstr          #+#    #+#             */
-/*   Updated: 2024/02/19 20:16:13 by domi             ###   ########.fr       */
+/*   Updated: 2024/02/20 12:07:42 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,13 @@
 void	dupe_texture(t_data *data, char *line, int i)
 {
 	char	*temp;
-	
+
 	temp = ft_substr(line, i, i + 2);
 	if (ft_strcmp(temp, "NO") < 0 && ft_strcmp(temp, "SO") < 0 && \
 		ft_strcmp(temp, "WE") < 0 && ft_strcmp(temp, "EA") < 0)
 	{
-			free(temp);
-			err_msg_free("Wrong texture assignments", 3, data);
+		free(temp);
+		err_msg_free("Wrong texture assignments", 3, data);
 	}
 	data->texture_count++;
 	free (temp);
@@ -57,6 +57,8 @@ void	syntax_check(t_data *data, char *line)
 			return ;
 		}
 	}
+	if (data->texture_count > 6)
+		err_msg_free("Too many textures\n", 3, data);
 }
 
 void	wall_check(t_data *data)
@@ -73,13 +75,15 @@ void	wall_check(t_data *data)
 			if (data->input->parsed_map[i][j] == '0')
 			{
 				if (i == 0 || i == ft_strarrlen(data->input->parsed_map) - 1)
-					err_msg_free("Invalid map, not closed off by walls\n", 3, data);
+					err_msg_free("Invalid map,\
+					not closed off by walls\n", 3, data);
 				if (!ft_strchr("1NSWE0", data->input->parsed_map[i + 1][j]) || \
 				(i > 0 && !ft_strchr("1NSWE0", \
 				data->input->parsed_map[i - 1][j])) || \
 				!ft_strchr("1NSWE0", data->input->parsed_map[i][j + 1]) || \
 				!ft_strchr("1NSWE0", data->input->parsed_map[i][j - 1]))
-					err_msg_free("Invalid map, not closed off by walls\n", 3, data);
+					err_msg_free("Invalid map,\
+					not closed off by walls\n", 3, data);
 			}
 			j++;
 		}
@@ -110,4 +114,21 @@ void	find_player(t_data *data, char **map)
 		err_msg_free("Too many players", 3, data);
 	if (player < 1)
 		err_msg_free("No player found", 3, data);
+}
+
+void	init_data2(t_data *data)
+{
+	data->textures = ft_calloc(1, sizeof(t_textures));
+	if (!data->textures)
+	{
+		free(data);
+		exit(1);
+	}
+	data->colors = ft_calloc(1, sizeof(t_colors));
+	if (!data->colors)
+	{
+		free(data->textures);
+		free(data);
+		exit(1);
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 10:41:28 by dmaessen          #+#    #+#             */
-/*   Updated: 2024/02/20 11:10:21 by dmaessen         ###   ########.fr       */
+/*   Updated: 2024/02/20 12:08:11 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,16 +52,16 @@ static void	check_middlemap(t_data *data, char *line, int j)
 		if (j == 0 || j == (int)ft_strlen(line))
 		{
 			if (line[j] != 49 && !line[j])
-				err_msg_free("Invalid map, empty space instead of a wall\n", 3, data);
+				err_msg_free("Invalid map, space instead of a wall\n", 3, data);
 		}
 		else
 		{
 			if (!ft_strchr("NESW01\0\n ", line[j])
 				&& line[j] != '\n' && line[j] != '\0')
-				err_msg_free("Invalid map, unidentified character in the map\n", 3, data);
+				err_msg_free("Invalid map, unidentified char\n", 3, data);
 			else if ((line[j] == 'N' || line[j] == 'S' || line[j] == 'W'
 					|| line[j] == 'E') && data->input->player == true)
-				err_msg_free("Invalid map, only one player allowed in the map\n", 3, data);
+				err_msg_free("Invalid map, only one player allowed\n", 3, data);
 			else if ((line[j] == 'N' || line[j] == 'S' || line[j] == 'W'
 					|| line[j] == 'E') && data->input->player == false)
 			{
@@ -78,13 +78,11 @@ static void	parse_map(t_data *data, char *line, int i, int j)
 	char	*newline;
 
 	syntax_check(data, line);
-	if (data->texture_count > 6)
-		err_msg_free("Too many textures\n", 3, data);
-	newline = rm_spaces(line, 3, data);
+	newline = rm_spaces(line, 3, data, 0);
 	if (i > 6)
 	{
-		printf("i ==%d\n", i);
-		data->input->parsed_map[i - 7] = ft_calloc(ft_strlen(line) + 1, sizeof(char));
+		data->input->parsed_map[i - 7] = \
+		ft_calloc(ft_strlen(line) + 1, sizeof(char));
 		if (!data->input->parsed_map[i - 7])
 			err_msg_free("Calloc failed\n", 3, data);
 		save_line(data, line, i - 7);
@@ -93,7 +91,7 @@ static void	parse_map(t_data *data, char *line, int i, int j)
 			while (newline[j])
 			{
 				if (newline[j] != 49 && !newline[j])
-					err_msg_free("Invalid map, empty space instead of a wall\n", 3, data);
+					err_msg_free("Invalid map\n", 3, data);
 				j++;
 			}
 		}
@@ -129,6 +127,5 @@ int	map_validation(t_data *data, char *file, int i)
 	find_player(data, data->input->parsed_map);
 	wall_check(data);
 	close(fd);
-	is_walkable_path(data);
-	return (parse_spaces(data), 0);
+	return (is_walkable_path(data), parse_spaces(data), 0);
 }
