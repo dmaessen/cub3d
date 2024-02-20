@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: domi <domi@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 10:41:44 by dmaessen          #+#    #+#             */
-/*   Updated: 2024/02/19 20:55:43 by domi             ###   ########.fr       */
+/*   Updated: 2024/02/20 10:48:01 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	main(int argc, char **argv)
 
 	if (argc != 2)
 		err_msg("Invalid number of arguments.\n");
-	data = calloc(1, sizeof(t_data));
+	data = ft_calloc(1, sizeof(t_data));
 	if (!data)
 		err_msg("Calloc failed.\n");
 	if (input_validation(data, argv[1]) == 0)

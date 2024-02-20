@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: domi <domi@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 10:41:28 by dmaessen          #+#    #+#             */
-/*   Updated: 2024/02/19 20:46:16 by domi             ###   ########.fr       */
+/*   Updated: 2024/02/20 11:10:21 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,24 +79,26 @@ static void	parse_map(t_data *data, char *line, int i, int j)
 
 	syntax_check(data, line);
 	if (data->texture_count > 6)
-		err_msg_free("Too many textures", 3, data);
-	newline = rm_spaces(line, 3, data); // calloc exit in there
+		err_msg_free("Too many textures\n", 3, data);
+	newline = rm_spaces(line, 3, data);
 	if (i > 6)
 	{
-		data->input->parsed_map[i - 7] = \
-		calloc_exit(ft_strlen(line) + 1, sizeof(char), data, 3); // maybe just put back to normal calloc
+		printf("i ==%d\n", i);
+		data->input->parsed_map[i - 7] = ft_calloc(ft_strlen(line) + 1, sizeof(char));
+		if (!data->input->parsed_map[i - 7])
+			err_msg_free("Calloc failed\n", 3, data);
 		save_line(data, line, i - 7);
 		if (i == 7 || i == data->input->nb_lines)
 		{
 			while (newline[j])
 			{
 				if (newline[j] != 49 && !newline[j])
-					err_msg_free("Invalid map, empty space instead of a wall\n", 3, data); // free newline??
+					err_msg_free("Invalid map, empty space instead of a wall\n", 3, data);
 				j++;
 			}
 		}
 		else
-			check_middlemap(data, newline, j); // free newline if goes wrong??
+			check_middlemap(data, newline, j);
 	}
 	free(newline);
 }
@@ -119,6 +121,8 @@ int	map_validation(t_data *data, char *file, int i)
 			break ;
 		if (ft_strcmp(line, "\n\0") != 0)
 			i++;
+		else if (ft_strcmp(line, "\n\0") == 0 && i > 6)
+			err_msg_free("Invalid map\n", 3, data);
 		parse_map(data, line, i, 0);
 		free(line);
 	}

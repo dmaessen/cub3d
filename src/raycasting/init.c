@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: domi <domi@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 13:53:16 by dmaessen          #+#    #+#             */
-/*   Updated: 2024/02/19 20:42:53 by domi             ###   ########.fr       */
+/*   Updated: 2024/02/20 11:50:30 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static void	init_datamap(t_data *data)
 
 static void	load_textures(t_data *data)
 {
-	data->wall = calloc(4, sizeof(t_wall));
+	data->wall = ft_calloc(4, sizeof(t_wall));
 	if (!data->wall)
 		return (err_msg_free("malloc failed", 3, data));
 	data->wall[0].tex = NULL;
@@ -69,7 +69,7 @@ static void	load_textures(t_data *data)
 /* 66degre angle for the Field of Vision, to correct fish-eye */
 void	init_map(t_data *data, mlx_t *mlx)
 {
-	data->m = calloc(1, sizeof(t_map));
+	data->m = ft_calloc(1, sizeof(t_map));
 	if (!data->m)
 		return (print_msg("malloc failed"), free_struct(data), free(data));
 	pos_player(data);

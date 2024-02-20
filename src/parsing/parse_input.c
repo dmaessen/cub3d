@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_input.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: domi <domi@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: dmaessen <dmaessen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 10:41:23 by dmaessen          #+#    #+#             */
-/*   Updated: 2024/02/19 20:38:21 by domi             ###   ########.fr       */
+/*   Updated: 2024/02/20 11:50:14 by dmaessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,13 @@
 
 static void	init_data(t_data *data)
 {
-	data->textures = calloc(1, sizeof(t_textures));
+	data->textures = ft_calloc(1, sizeof(t_textures));
 	if (!data->textures)
 	{	
 		free(data);
 		exit(1);
 	}
-	data->colors = calloc(1, sizeof(t_colors));
+	data->colors = ft_calloc(1, sizeof(t_colors));
 	if (!data->colors)
 	{	
 		free(data->textures);
@@ -38,7 +38,7 @@ static void	init_data(t_data *data)
 	data->colors->f_color_b = -1;
 	data->colors->f_color_g = -1;
 	data->colors->f_color_r = -1;
-	data->input = calloc(1, sizeof(t_data_input));
+	data->input = ft_calloc(1, sizeof(t_data_input));
 	if (!data->input)
 	{	
 		free(data->textures);
